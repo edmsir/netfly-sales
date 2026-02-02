@@ -68,13 +68,13 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                             className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0 transform-gpu backface-hidden"
                         >
                             <div className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-blue-500/30 transition-all duration-500 h-full">
-                                <div className="relative h-80 w-full overflow-hidden bg-[#111]">
+                                <div className="relative h-80 w-full overflow-hidden bg-[#111] p-4">
                                     {product.image && (
                                         <Image
                                             src={product.image}
                                             alt={product.title}
                                             fill
-                                            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                                            className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                     )}

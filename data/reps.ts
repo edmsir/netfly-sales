@@ -4,6 +4,7 @@ export const reps = [
         username: "oguzhan-balci",
         name: "Oğuzhan Balcı",
         title: "Satış Temsilcisi",
+        branch: "Bursa/İnegöl Malzeme Şube",
         company: "By Malzeme",
         companyLogo: "/bymalzeme_final.png",
         bio: "Profesyonel satış çözümleri ve malzeme tedariği konusunda uzman kadromuzla yanınızdayız.",
@@ -87,21 +88,21 @@ export const reps = [
             {
                 id: "prod-12",
                 title: "BLS 205 Endüstriyel Çözüm",
-                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                description: "Endüstriyel döşeme ve sünger yapıştırma uygulamaları için özel solüsyon.",
                 price: "",
                 image: "/bls205.jpeg"
             },
             {
                 id: "prod-13",
                 title: "BLS 207 Temizleme Sıvısı",
-                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                description: "Profesyonel temizleme ve yüzey hazırlama sıvısı, kalıntı bırakmayan formül.",
                 price: "",
                 image: "/bls207.png"
             },
             {
                 id: "prod-14",
                 title: "BUL 73 Klasik Yapıştırıcı",
-                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                description: "Klasik döşeme yapıştırıcısı (Bally tipi), yüksek tutunma ve dayanıklılık.",
                 price: "",
                 image: "/bul73.jpg"
             },
@@ -136,7 +137,7 @@ export const reps = [
             {
                 id: "prod-19",
                 title: "Lüks Sehpa Mekanizması",
-                description: "Fondtan Çıkan Sehpa Mekanizması.",
+                description: "Akıllı sehpa ve masa tasarımları için kademeli yükseltme ve açma sistemi.",
                 price: "",
                 image: "/sehpamekanizmasi.jpg"
             },

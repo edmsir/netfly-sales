@@ -6,12 +6,12 @@ import Image from "next/image";
 import { reps } from "@/data/reps";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { QRCodeGenerator } from "@/components/QRCodeGenerator";
-import { Phone, Mail, MessageCircle, ArrowLeft } from "lucide-react";
+import { Phone, Mail, MessageCircle, ArrowLeft, MapPin } from "lucide-react";
 import Link from "next/link";
 
 export default function RepPage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = use(params);
-  const rep = reps.find((r) => r.username === username);
+  const rep = (reps as any[]).find((r) => r.username === username);
 
   if (!rep) {
     notFound();
@@ -19,7 +19,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
   const currentUrl = typeof window !== "undefined"
     ? window.location.href
-    : `https://netfly.com/${rep.username}`;
+    : `https://byfabric.netlify.app/${rep.username}`;
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
@@ -74,9 +74,18 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest">
               {rep.title}
             </div>
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+
+            <h1 className="text-5xl md:text-7xl font-black mb-2 tracking-tight">
               {rep.name}
             </h1>
+
+            {rep.branch && (
+              <div className="flex items-center justify-center lg:justify-start gap-2 text-zinc-400 text-lg mb-8 font-medium italic">
+                <MapPin className="w-5 h-5 text-blue-500" />
+                {rep.branch}
+              </div>
+            )}
+
             <p className="text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed font-medium">
               {rep.bio}
             </p>

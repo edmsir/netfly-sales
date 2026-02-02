@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 
 interface RepCardProps {
     username: string;
@@ -10,9 +10,10 @@ interface RepCardProps {
     title: string;
     image: string;
     phone: string;
+    branch?: string;
 }
 
-export function RepCard({ username, name, title, image, phone }: RepCardProps) {
+export function RepCard({ username, name, title, image, phone, branch }: RepCardProps) {
     const isOguzhan = image.includes('oguzhan');
     const logoSrc = isOguzhan ? '/bymalzeme_final.png' : '/byfabric_final.png';
 
@@ -43,10 +44,18 @@ export function RepCard({ username, name, title, image, phone }: RepCardProps) {
                     />
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
                     {name}
                 </h3>
-                <p className="text-blue-400/80 text-sm font-medium tracking-wide uppercase mb-4">{title}</p>
+                <p className="text-blue-400/80 text-xs font-bold tracking-widest uppercase mb-4">{title}</p>
+
+                {branch && (
+                    <div className="flex items-center gap-1.5 text-zinc-500 text-xs mb-4 font-medium">
+                        <MapPin className="w-3 h-3 text-blue-500" />
+                        {branch}
+                    </div>
+                )}
+
                 <p className="text-zinc-500 text-sm mb-8">{phone}</p>
 
                 <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-white/60 bg-white/5 px-6 py-3 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
