@@ -76,6 +76,76 @@ export const reps = [
                 description: "Her türlü ahşap birleştirme işlemi için ekonomik ve sağlam vidalar.",
                 price: "",
                 image: "/stdvida.jpg"
+            },
+            {
+                id: "prod-11",
+                title: "Apel Tutkal",
+                description: "Mobilya ve ahşap işleri için yüksek mukavemetli profesyonel tutkal.",
+                price: "",
+                image: "/apeltutkal.jpeg"
+            },
+            {
+                id: "prod-12",
+                title: "BLS 205 Endüstriyel Çözüm",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                price: "",
+                image: "/bls205.jpeg"
+            },
+            {
+                id: "prod-13",
+                title: "BLS 207 Temizleme Sıvısı",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                price: "",
+                image: "/bls207.png"
+            },
+            {
+                id: "prod-14",
+                title: "BUL 73 Klasik Yapıştırıcı",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
+                price: "",
+                image: "/bul73.jpg"
+            },
+            {
+                id: "prod-15",
+                title: "CSS Lüx Makas Mekanizma",
+                description: "Modern koltuk ve kanepe tasarımları için sessiz ve dayanıklı lüks açılır mekanizma.",
+                price: "",
+                image: "/cssluxmekanizma.jpg"
+            },
+            {
+                id: "prod-16",
+                title: "Döner Kare Mekanizma",
+                description: "Koltuk ve berjerler için 360 derece dönebilen yüksek taşıma kapasiteli çelik mekanizma.",
+                price: "",
+                image: "/donerkare.png"
+            },
+            {
+                id: "prod-17",
+                title: "Kumaş Çizgi Taşı",
+                description: "Tekstil ve döşeme işaretlemeleri için kolay temizlenebilir, net hatlı çizgi taşı.",
+                price: "",
+                image: "/kumascizgitasi.jpeg"
+            },
+            {
+                id: "prod-18",
+                title: "Mitrapel Hızlı Yapıştırıcı",
+                description: "MDF Kit, saniyeler içinde mükemmel yapışma sağlayan profesyonel set.",
+                price: "",
+                image: "/mitrapelhizliyapistirici.png"
+            },
+            {
+                id: "prod-19",
+                title: "Lüks Sehpa Mekanizması",
+                description: "Fondtan Çıkan Sehpa Mekanizması.",
+                price: "",
+                image: "/sehpamekanizmasi.jpg"
+            },
+            {
+                id: "prod-20",
+                title: "Tomax Yıldız Endüstriyel Uç",
+                description: "Yüksek tork dirençli, endüstriyel standartlarda montaj ekipmanı.",
+                price: "",
+                image: "/tomaxyildiz.png"
             }
         ]
     }
