@@ -23,10 +23,10 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
-      {/* Background Decor */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-blue-600/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-blue-900/10 blur-[120px] rounded-full" />
+      {/* Background Decor - Optimized for Performance */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none select-none">
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.08)_0%,transparent_50%)]" />
+        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_bottom_left,rgba(30,58,138,0.08)_0%,transparent_50%)]" />
       </div>
 
       {/* Top Navigation */}
@@ -114,7 +114,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             <div className="mb-4 text-center">
               <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">Profil Paylaş</p>
             </div>
-            <QRCodeGenerator url={currentUrl} />
+            <QRCodeGenerator url={`https://byfabric.netlify.app/${rep.username}`} />
           </div>
         </div>
       </section>
@@ -129,7 +129,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               <div className="mb-4 text-center">
                 <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">Profil QR Kodu</p>
               </div>
-              <QRCodeGenerator url={currentUrl} />
+              <QRCodeGenerator url={`https://byfabric.netlify.app/${rep.username}`} />
             </div>
           </div>
 

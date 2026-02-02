@@ -65,7 +65,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     {products.map((product) => (
                         <div
                             key={product.id}
-                            className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0"
+                            className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0 transform-gpu backface-hidden"
                         >
                             <div className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-blue-500/30 transition-all duration-500 h-full">
                                 <div className="relative h-80 w-full overflow-hidden bg-[#111]">
