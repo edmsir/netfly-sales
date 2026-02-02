@@ -88,21 +88,21 @@ export const reps = [
             {
                 id: "prod-12",
                 title: "BLS 205 Endüstriyel Çözüm",
-                description: "Endüstriyel döşeme ve sünger yapıştırma uygulamaları için özel solüsyon.",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bls205.jpeg"
             },
             {
                 id: "prod-13",
                 title: "BLS 207 Temizleme Sıvısı",
-                description: "Profesyonel temizleme ve yüzey hazırlama sıvısı, kalıntı bırakmayan formül.",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bls207.png"
             },
             {
                 id: "prod-14",
                 title: "BUL 73 Klasik Yapıştırıcı",
-                description: "Klasik döşeme yapıştırıcısı (Bally tipi), yüksek tutunma ve dayanıklılık.",
+                description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bul73.jpg"
             },
