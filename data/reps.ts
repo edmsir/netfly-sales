@@ -12,7 +12,6 @@ export const reps = [
         contactInfo: {
             phone: "+90 545 278 12 75",
             whatsapp: "905452781275",
-            email: "oguzhan@bymalzeme.com",
         },
         products: [
             {
@@ -87,21 +86,21 @@ export const reps = [
             },
             {
                 id: "prod-12",
-                title: "BLS 205 Endüstriyel Çözüm",
+                title: "BLS 205 Elastik Kolon",
                 description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bls205.jpeg"
             },
             {
                 id: "prod-13",
-                title: "BLS 207 Temizleme Sıvısı",
+                title: "BLS 207 Elastik Kolon",
                 description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bls207.png"
             },
             {
                 id: "prod-14",
-                title: "BUL 73 Klasik Yapıştırıcı",
+                title: "BUL 73 Elastik Kolon",
                 description: "elastik kolon, içinde lastik iplik bulunan ve bu sayede esneklik sağlayan dayanıklı bir dokuma şerit.",
                 price: "",
                 image: "/bul73.jpg"

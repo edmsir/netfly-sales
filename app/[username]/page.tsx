@@ -108,13 +108,6 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </a>
-              <a
-                href={`mailto:${rep.contactInfo.email}`}
-                className="flex items-center justify-center gap-3 bg-zinc-800 text-white px-6 py-4 rounded-2xl font-bold border border-white/5 hover:bg-zinc-700 transition-all active:scale-95 shadow-xl"
-              >
-                <Mail className="w-5 h-5" />
-                E-posta
-              </a>
             </div>
           </div>
 
