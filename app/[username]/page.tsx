@@ -6,8 +6,9 @@ import Image from "next/image";
 import { reps } from "@/data/reps";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { QRCodeGenerator } from "@/components/QRCodeGenerator";
-import { Phone, Mail, MessageCircle, ArrowLeft, MapPin } from "lucide-react";
+import { Phone, MessageCircle, ArrowLeft, MapPin } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function RepPage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = use(params);
@@ -17,12 +18,8 @@ export default function RepPage({ params }: { params: Promise<{ username: string
     notFound();
   }
 
-  const currentUrl = typeof window !== "undefined"
-    ? window.location.href
-    : `https://byfabric.netlify.app/${rep.username}`;
-
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background Decor - Optimized for Performance */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none select-none">
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.08)_0%,transparent_50%)]" />
@@ -42,7 +39,12 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         <div className="flex flex-col lg:flex-row items-center gap-16">
 
           {/* Large Profile Image */}
-          <div className="relative shrink-0">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative shrink-0"
+          >
             <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-[40px] border border-white/10 overflow-hidden shadow-2xl bg-[#111]">
               <Image
@@ -54,12 +56,17 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                 sizes="(max-width: 768px) 256px, 320px"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Info Block */}
           <div className="flex-grow text-center lg:text-left">
             {/* Company Logo Area */}
-            <div className="mb-10 flex justify-center lg:justify-start">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="mb-10 flex justify-center lg:justify-start"
+            >
               <div className="relative h-32 w-80 md:h-40 md:w-96">
                 <Image
                   src={rep.companyLogo}
@@ -69,29 +76,54 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest"
+            >
               {rep.title}
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-black mb-2 tracking-tight">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="text-5xl md:text-7xl font-black mb-2 tracking-tight"
+            >
               {rep.name}
-            </h1>
+            </motion.h1>
 
             {rep.branch && (
-              <div className="flex items-center justify-center lg:justify-start gap-2 text-zinc-400 text-lg mb-8 font-medium italic">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="flex items-center justify-center lg:justify-start gap-2 text-zinc-400 text-lg mb-8 font-medium italic"
+              >
                 <MapPin className="w-5 h-5 text-blue-500" />
                 {rep.branch}
-              </div>
+              </motion.div>
             )}
 
-            <p className="text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed font-medium">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.7 }}
+              className="text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed font-medium"
+            >
               {rep.bio}
-            </p>
+            </motion.p>
 
             {/* Quick Contact Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-sm mx-auto lg:mx-0"
+            >
               <a
                 href={`tel:${rep.contactInfo.phone.replace(/\s/g, "")}`}
                 className="flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all active:scale-95 shadow-xl"
@@ -108,16 +140,21 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </a>
-            </div>
+            </motion.div>
           </div>
 
           {/* QR Code Section */}
-          <div className="hidden xl:block shrink-0 bg-white/5 p-6 rounded-[32px] border border-white/10 backdrop-blur-xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.3, duration: 0.5 }}
+            className="hidden xl:block shrink-0 bg-white/5 p-6 rounded-[32px] border border-white/10 backdrop-blur-xl"
+          >
             <div className="mb-4 text-center">
               <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">Profil Paylaş</p>
             </div>
             <QRCodeGenerator url={`https://byfabric.netlify.app/${rep.username}`} />
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -126,17 +163,30 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         <div className="container mx-auto px-6">
 
           {/* Mobile/Tablet QR (Visible on smaller screens) */}
-          <div className="xl:hidden flex flex-col items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="xl:hidden flex flex-col items-center mb-20"
+          >
             <div className="bg-white/5 p-6 rounded-[32px] border border-white/10 backdrop-blur-xl">
               <div className="mb-4 text-center">
                 <p className="text-xs font-bold text-zinc-500 uppercase tracking-[0.2em]">Profil QR Kodu</p>
               </div>
               <QRCodeGenerator url={`https://byfabric.netlify.app/${rep.username}`} />
             </div>
-          </div>
+          </motion.div>
 
           {rep.products && rep.products.length > 0 && (
-            <ProductCarousel products={rep.products} />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 1 }}
+            >
+              <ProductCarousel products={rep.products} />
+            </motion.div>
           )}
 
           <div className="mt-32 text-center text-zinc-600 text-sm font-medium">

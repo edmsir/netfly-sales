@@ -21,7 +21,7 @@ interface ProductCarouselProps {
 export function ProductCarousel({ products }: ProductCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel(
         { loop: true, align: "start" },
-        [AutoScroll({ speed: 1, stopOnInteraction: false, stopOnMouseEnter: true })]
+        [AutoScroll({ speed: 2, stopOnInteraction: false, stopOnMouseEnter: true })]
     );
 
     const scrollPrev = useCallback(() => {
