@@ -157,7 +157,7 @@ export const reps = [
         branch: "İstanbul Merkez Ofis",
         company: "ByFabric",
         companyLogo: "/byfabric_final.png",
-        bio: "Züccaciye ve döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
+        bio: "Döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
         profileImage: "https://ui-avatars.com/api/?name=Hasan+Cakar&background=e91e63&color=fff&size=512",
         contactInfo: {
             phone: "+90 554 165 39 32",
@@ -182,7 +182,7 @@ export const reps = [
             {
                 id: "zen-serisi",
                 title: "ZEN Serisi",
-                description: "Perdelik kumaşta ileri teknoloji ile üretilen entegre tesis ürünü. Polar astar desteği ile dayanıklı ve estetik. (410 gsm, 142 cm)",
+                description: "Döşemelik kumaşta ileri teknoloji ile üretilen entegre tesis ürünü. Polar astar desteği ile dayanıklı ve estetik. (410 gsm, 142 cm)",
                 price: "",
                 image: "/products/zen.jpg",
                 variants: [
@@ -195,7 +195,7 @@ export const reps = [
             {
                 id: "vera-serisi",
                 title: "VERA Serisi",
-                description: "Modern tasarımlar için ideal, polar astar özellikli yüksek kaliteli perdelik kumaş serisi. (360 gsm, 142 cm)",
+                description: "Modern tasarımlar için ideal, polar astar özellikli yüksek kaliteli döşemelik kumaş serisi. (360 gsm, 142 cm)",
                 price: "",
                 image: "/products/vera.jpg",
                 variants: [
@@ -225,7 +225,7 @@ export const reps = [
             {
                 id: "anka-serisi",
                 title: "ANKA Serisi",
-                description: "Entegre tesislerde perdelik kumaş üretimi ile uzun ömürlü ve şık çözümler. (360 gsm, 142 cm)",
+                description: "Entegre tesislerde döşemelik kumaş üretimi ile uzun ömürlü ve şık çözümler. (360 gsm, 142 cm)",
                 price: "",
                 image: "/products/anka.jpg",
                 variants: [

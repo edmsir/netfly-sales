@@ -19,7 +19,7 @@ export function RepCard({ username, name, title, image, phone, branch }: RepCard
 
     return (
         <Link href={`/${username}`} className="block group">
-            <div className="relative bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-blue-500/50 transition-all duration-500 p-8 flex flex-col items-center text-center h-full">
+            <div className="relative bg-[#0a0a0a] border border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:border-blue-500/50 transition-all duration-500 p-6 md:p-8 flex flex-col items-center text-center h-full">
                 {/* Hover Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

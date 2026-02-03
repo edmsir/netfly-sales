@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "ByFabric | Satış Platformu",
-  description: "Züccaciye ve döşemelik malzeme dünyasında profesyonel çözüm ortağınız.",
+  description: "Ev tekstili ve döşemelik malzeme dünyasında profesyonel çözüm ortağınız.",
 };
 
 export default function RootLayout({

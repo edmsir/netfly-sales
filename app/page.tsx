@@ -25,7 +25,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
       </div>
 
-      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center pt-20 pb-12 px-6">
+      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center pt-12 md:pt-20 pb-8 md:pb-12 px-4 md:px-6">
         <motion.div
           style={{ opacity, scale }}
           className="max-w-5xl mx-auto text-center"
@@ -35,7 +35,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "circOut" }}
-            className="flex justify-center mb-12"
+            className="flex justify-center mb-8 md:mb-12"
           >
             <div className="relative h-32 w-80 md:h-40 md:w-[450px] bg-white/5 rounded-[40px] p-8 backdrop-blur-sm border border-white/5">
               <Image
@@ -58,7 +58,7 @@ export default function Home() {
               <span className="text-zinc-400">Malzemelerinde Uzman Kadromuz</span>
             </h1>
 
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-12">
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-8 md:mb-12">
               Koltuk döşemelik kumaşlar ve mobilya imalatı için gerekli tüm teknik <br className="hidden md:block" />
               malzemeleri, tecrübeli ekibimizle kapınıza getiriyoruz.
             </p>
@@ -71,13 +71,13 @@ export default function Home() {
             transition={{ delay: 1, duration: 1 }}
             className="flex flex-col items-center gap-4"
           >
-            <div className="w-px h-24 bg-gradient-to-b from-rose-500/50 to-transparent" />
+            <div className="w-px h-16 md:h-24 bg-gradient-to-b from-rose-500/50 to-transparent" />
             <span className="text-zinc-600 text-xs font-bold uppercase tracking-[0.2em]">Temsilcilerimiz</span>
           </motion.div>
         </motion.div>
 
         {/* Reps Grid */}
-        <div className="w-full max-w-7xl mx-auto mt-32 px-4">
+        <div className="w-full max-w-7xl mx-auto mt-16 md:mt-32 px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export default function Home() {
         </div>
 
         {/* Improved Footer */}
-        <footer className="mt-40 py-12 border-t border-white/5 w-full">
+        <footer className="mt-20 md:mt-40 py-8 md:py-12 border-t border-white/5 w-full">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">
               <div className="h-8 w-24 relative opacity-50 grayscale hover:grayscale-0 transition-all cursor-pointer">

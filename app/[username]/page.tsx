@@ -27,7 +27,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
       </div>
 
       {/* Top Navigation */}
-      <nav className="relative z-50 container mx-auto px-6 py-8">
+      <nav className="relative z-50 container mx-auto px-4 md:px-6 py-6 md:py-8">
         <Link href="/" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Ana Sayfaya Dön
@@ -35,8 +35,8 @@ export default function RepPage({ params }: { params: Promise<{ username: string
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 container mx-auto px-6 pt-8 pb-24">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+      <section className="relative z-10 container mx-auto px-4 md:px-6 pt-4 md:pt-8 pb-12 md:pb-24">
+        <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-16">
 
           {/* Large Profile Image */}
           <motion.div
@@ -65,7 +65,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="mb-10 flex justify-center lg:justify-start"
+              className="mb-8 md:mb-10 flex justify-center lg:justify-start"
             >
               <div className="relative h-32 w-80 md:h-40 md:w-96 bg-white/5 rounded-[32px] p-6 backdrop-blur-sm border border-white/5">
                 <Image
@@ -112,7 +112,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.7 }}
-              className="text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed font-medium"
+              className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-8 md:mb-10 leading-relaxed font-medium"
             >
               {rep.bio}
             </motion.p>
@@ -159,7 +159,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
       </section>
 
       {/* Products Section */}
-      <section className="relative z-10 bg-zinc-950/50 backdrop-blur-sm border-t border-white/5 py-24">
+      <section className="relative z-10 bg-zinc-950/50 backdrop-blur-sm border-t border-white/5 py-16 md:py-24">
         <div className="container mx-auto px-6">
 
           {/* Mobile/Tablet QR (Visible on smaller screens) */}
@@ -189,7 +189,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             </motion.div>
           )}
 
-          <div className="mt-32 text-center text-zinc-600 text-sm font-medium">
+          <div className="mt-20 md:mt-32 text-center text-zinc-600 text-sm font-medium">
             <p>© {new Date().getFullYear()} Netfly Sales. Tüm hakları saklıdır.</p>
           </div>
         </div>
