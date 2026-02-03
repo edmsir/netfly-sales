@@ -15,7 +15,7 @@ interface RepCardProps {
 
 export function RepCard({ username, name, title, image, phone, branch }: RepCardProps) {
     const isOguzhan = image.includes('oguzhan');
-    const logoSrc = isOguzhan ? '/bymalzeme_final.png' : '/byfabric_final.png';
+    const logoSrc = isOguzhan ? '/branding/bymalzeme_final.png' : '/branding/byfabric_final.png';
 
     return (
         <Link href={`/${username}`} className="block group">

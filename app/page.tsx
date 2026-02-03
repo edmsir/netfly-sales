@@ -39,7 +39,7 @@ export default function Home() {
           >
             <div className="relative h-32 w-80 md:h-40 md:w-[450px] bg-white/5 rounded-[40px] p-8 backdrop-blur-sm border border-white/5">
               <Image
-                src="/byfabric_final.png"
+                src="/branding/byfabric_final.png"
                 alt="ByFabric Logo"
                 fill
                 className="object-contain filter drop-shadow-[0_0_15px_rgba(233,30,99,0.3)] brightness-110"
@@ -104,7 +104,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">
               <div className="h-8 w-24 relative opacity-50 grayscale hover:grayscale-0 transition-all cursor-pointer">
-                <Image src="/byfabric_final.png" alt="ByFabric" fill className="object-contain" />
+                <Image src="/branding/byfabric_final.png" alt="ByFabric" fill className="object-contain" />
               </div>
               <span className="text-zinc-600 text-sm">| Professional Sales Platform</span>
             </div>
