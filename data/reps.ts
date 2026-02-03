@@ -148,6 +148,58 @@ export const reps = [
                 image: "/tomaxyildiz.png"
             }
         ]
+    },
+    {
+        id: "rep-hasan",
+        username: "hasan-cakar",
+        name: "Hasan Çakar",
+        title: "Satış Temsilcisi",
+        branch: "İstanbul Merkez Ofis",
+        company: "ByFabric",
+        companyLogo: "/byfabric_final.png",
+        bio: "Züccaciye ve döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
+        profileImage: "https://ui-avatars.com/api/?name=Hasan+Cakar&background=e91e63&color=fff&size=512",
+        contactInfo: {
+            phone: "+90 554 165 39 32",
+            whatsapp: "905541653932",
+        },
+        products: [
+            {
+                id: "luna-serisi",
+                title: "LUNA Serisi",
+                description: "İleri teknoloji makinelerle döşemelik kumaşta uzun yıllardır üretilen polar astar özellikli premium seri. (310 gsm, 142 cm)",
+                price: "",
+                image: "/products/luna.jpg"
+            },
+            {
+                id: "zen-serisi",
+                title: "ZEN Serisi",
+                description: "Perdelik kumaşta ileri teknoloji ile üretilen entegre tesis ürünü. Polar astar desteği ile dayanıklı ve estetik. (410 gsm, 142 cm)",
+                price: "",
+                image: "/products/zen.jpg"
+            },
+            {
+                id: "vera-serisi",
+                title: "VERA Serisi",
+                description: "Modern tasarımlar için ideal, polar astar özellikli yüksek kaliteli perdelik kumaş serisi. (360 gsm, 142 cm)",
+                price: "",
+                image: "/products/vera.jpg"
+            },
+            {
+                id: "babyface-serisi",
+                title: "BABYFACE Serisi",
+                description: "Yumuşak dokusu ve polar astarı ile konfor ve dayanıklılığı bir araya getiren özel seri. (310 gsm, 142 cm)",
+                price: "",
+                image: "/products/babyface.jpg"
+            },
+            {
+                id: "anka-serisi",
+                title: "ANKA Serisi",
+                description: "Entegre tesislerde perdelik kumaş üretimi ile uzun ömürlü ve şık çözümler. (360 gsm, 142 cm)",
+                price: "",
+                image: "/products/anka.jpg"
+            }
+        ]
     }
 ];
 

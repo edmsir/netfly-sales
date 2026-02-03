@@ -37,12 +37,12 @@ export default function Home() {
             transition={{ duration: 1, ease: "circOut" }}
             className="flex justify-center mb-12"
           >
-            <div className="relative h-32 w-80 md:h-40 md:w-[450px]">
+            <div className="relative h-32 w-80 md:h-40 md:w-[450px] bg-white/5 rounded-[40px] p-8 backdrop-blur-sm border border-white/5">
               <Image
                 src="/byfabric_final.png"
                 alt="ByFabric Logo"
                 fill
-                className="object-contain filter drop-shadow-[0_0_15px_rgba(233,30,99,0.3)]"
+                className="object-contain filter drop-shadow-[0_0_15px_rgba(233,30,99,0.3)] brightness-110"
                 priority
               />
             </div>
@@ -54,13 +54,13 @@ export default function Home() {
             transition={{ delay: 0.3, duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-black mb-8 tracking-tight leading-tight">
-              Toptan <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-500">Züccaciye & Döşeme</span><br />
+              Toptan & Perakende <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-500">Ev Tekstili & Mobilya</span><br />
               <span className="text-zinc-400">Malzemelerinde Uzman Kadromuz</span>
             </h1>
 
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-12">
-              Sektörün öncü markalarını, tecrübeli satış temsilcilerimizle <br className="hidden md:block" />
-              ihtiyaç duyduğunuz her an kapınıza getiriyoruz.
+              Koltuk döşemelik kumaşlar ve mobilya imalatı için gerekli tüm teknik <br className="hidden md:block" />
+              malzemeleri, tecrübeli ekibimizle kapınıza getiriyoruz.
             </p>
           </motion.div>
 

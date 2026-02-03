@@ -24,7 +24,7 @@ export function RepCard({ username, name, title, image, phone, branch }: RepCard
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Company Logo Mini - Ultra Large */}
-                <div className="relative h-24 w-64 mb-8 opacity-100 transition-opacity">
+                <div className="relative h-20 w-48 mb-8 bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
                     <Image
                         src={logoSrc}
                         alt="Logo"
