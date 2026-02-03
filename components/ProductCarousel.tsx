@@ -85,6 +85,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                                         alt={`${product.title} variant ${idx}`}
                                                         fill
                                                         className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                                        sizes="(max-width: 768px) 25vw, 15vw"
+                                                        quality={60}
                                                     />
                                                 </div>
                                             ))}
@@ -174,6 +176,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                             alt={`${selectedProduct.title} variant ${idx + 1}`}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                            quality={75}
+                                            loading="lazy"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                                             <div className="absolute bottom-4 left-4 text-white font-bold text-sm">
