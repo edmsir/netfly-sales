@@ -169,18 +169,44 @@ export const reps = [
         contactInfo: { phone: "+90 554 653 37 22", whatsapp: "905546533722" },
         products: fabricProducts
     },
-    // 2. BURSA (ByFabric)
     {
-        id: "rep-arda",
-        username: "arda",
-        name: "Arda",
+        id: "rep-hasan",
+        username: "hasan-cakar",
+        name: "Hasan Çakar",
         title: "Satış Temsilcisi",
-        branch: "Bursa Şube",
+        branch: "İstanbul Merkez Ofis",
         company: "ByFabric",
         companyLogo: "/branding/byfabric_final.png",
-        bio: "Bursa bölgesinde döşemelik kumaş ve tasarım çözümlerimizle hizmetinizdeyiz.",
-        profileImage: "/reps/arda.png",
-        contactInfo: { phone: "+90 5XX XXX XX XX", whatsapp: "" },
+        bio: "İstanbul merkez ofisimizde döşemelik kumaş çözümlerinde profesyonel hizmet sunuyoruz.",
+        profileImage: "https://ui-avatars.com/api/?name=Hasan+Cakar&background=e91e63&color=fff&size=512",
+        contactInfo: { phone: "+90 554 165 39 32", whatsapp: "905541653932" },
+        products: fabricProducts
+    },
+    // 2. BURSA (ByFabric - Bursa/İnegöl Şube)
+    {
+        id: "rep-oguzhan-alan",
+        username: "oguzhan-alan",
+        name: "Oğuzhan Alan",
+        title: "Satış Temsilcisi",
+        branch: "Bursa/İnegöl Şube",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric_final.png",
+        bio: "İnegöl bölgesinde döşemelik kumaş çözümlerimizle hizmetinizdeyiz.",
+        profileImage: "/reps/oguzhan-alan.png",
+        contactInfo: { phone: "+90 535 599 87 64", whatsapp: "905355998764" },
+        products: fabricProducts
+    },
+    {
+        id: "rep-alper",
+        username: "alper-halci",
+        name: "Alper Halcı",
+        title: "Satış Temsilcisi",
+        branch: "Bursa/İnegöl Şube",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric_final.png",
+        bio: "İnegöl bölgesinde profesyonel döşemelik kumaş tedariği.",
+        profileImage: "/reps/alper-halcı.png",
+        contactInfo: { phone: "+90 530 330 59 33", whatsapp: "905303305933" },
         products: fabricProducts
     },
     // 3. BAYRAMPAŞA
@@ -206,36 +232,23 @@ export const reps = [
         branch: "Ankara/Siteler Şube",
         company: "ByFabric",
         companyLogo: "/branding/byfabric_final.png",
-        bio: "Ankara Siteler bölgesinde döşemelik kumaş ve malzeme ihtiyaçlarınız için profesyonel destek.",
+        bio: "Ankara Siteler bölgesinde döşemelik kumaş ihtiyaçlarınız için profesyonel destek.",
         profileImage: "/reps/mustafa-dirican.png",
         contactInfo: { phone: "+90 532 592 33 63", whatsapp: "905325923363" },
         products: fabricProducts
     },
-    // 5. MALZEME (By Malzeme - İnegöl)
+    // 5. MALZEME (By Malzeme - Bursa/İnegöl Malzeme Şube)
     {
-        id: "rep-oguzhan",
-        username: "oguzhan-alan",
-        name: "Oğuzhan Alan",
+        id: "rep-oguzhan-balci",
+        username: "oguzhan-balci",
+        name: "Oğuzhan Bağcı",
         title: "Satış Temsilcisi",
-        branch: "İnegöl Malzeme Şube",
+        branch: "Bursa/İnegöl Malzeme Şube",
         company: "By Malzeme",
         companyLogo: "/branding/bymalzeme_final.png",
-        bio: "İnegöl mobilya sanayisinde teknik malzeme ve aksesuar tedariğinde uzman kadromuz.",
-        profileImage: "/reps/oguzhan-alan.png",
-        contactInfo: { phone: "+90 535 599 87 64", whatsapp: "905355998764" },
-        products: materialProducts
-    },
-    {
-        id: "rep-alper",
-        username: "alper-halci",
-        name: "Alper Halcı",
-        title: "Satış Temsilcisi",
-        branch: "İnegöl Malzeme Şube",
-        company: "By Malzeme",
-        companyLogo: "/branding/bymalzeme_final.png",
-        bio: "İnegöl bölgesinde profesyonel mobilya montaj ve döşeme ekipmanları tedariği.",
-        profileImage: "/reps/alper-halcı.png",
-        contactInfo: { phone: "+90 530 330 59 33", whatsapp: "905303305933" },
+        bio: "Teknik malzeme, aksesuar ve hırdavat ürünlerinde uzman kadromuzla yanınızdayız.",
+        profileImage: "/reps/oguzhan_final.jpeg",
+        contactInfo: { phone: "+90 545 278 12 75", whatsapp: "905452781275" },
         products: materialProducts
     },
     // 6. İZMİR
