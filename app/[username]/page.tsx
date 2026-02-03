@@ -67,7 +67,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               transition={{ delay: 0.3, duration: 0.6 }}
               className="mb-10 flex justify-center lg:justify-start"
             >
-              <div className="relative h-32 w-80 md:h-40 md:w-96">
+              <div className="relative h-32 w-80 md:h-40 md:w-96 bg-white/5 rounded-[32px] p-6 backdrop-blur-sm border border-white/5">
                 <Image
                   src={rep.companyLogo}
                   alt={rep.company || "Company Logo"}

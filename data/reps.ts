@@ -169,35 +169,74 @@ export const reps = [
                 title: "LUNA Serisi",
                 description: "İleri teknoloji makinelerle döşemelik kumaşta uzun yıllardır üretilen polar astar özellikli premium seri. (310 gsm, 142 cm)",
                 price: "",
-                image: "/products/luna.jpg"
+                image: "/products/luna.jpg",
+                variants: [
+                    "/products/luna/01.JPG", "/products/luna/02.JPG", "/products/luna/03.JPG", "/products/luna/04.JPG",
+                    "/products/luna/05.JPG", "/products/luna/06.JPG", "/products/luna/07.JPG", "/products/luna/08.JPG",
+                    "/products/luna/09.JPG", "/products/luna/10.JPG", "/products/luna/11.JPG", "/products/luna/12.JPG",
+                    "/products/luna/13.JPG", "/products/luna/14.JPG", "/products/luna/15.JPG", "/products/luna/16.JPG",
+                    "/products/luna/17.JPG", "/products/luna/18.JPG", "/products/luna/19.JPG", "/products/luna/20.JPG",
+                    "/products/luna/21.JPG", "/products/luna/22.JPG", "/products/luna/23.JPG", "/products/luna/24.JPG"
+                ]
             },
             {
                 id: "zen-serisi",
                 title: "ZEN Serisi",
                 description: "Perdelik kumaşta ileri teknoloji ile üretilen entegre tesis ürünü. Polar astar desteği ile dayanıklı ve estetik. (410 gsm, 142 cm)",
                 price: "",
-                image: "/products/zen.jpg"
+                image: "/products/zen.jpg",
+                variants: [
+                    "/products/zen/ZEN-1.JPG", "/products/zen/ZEN-2.JPG", "/products/zen/ZEN-3.JPG", "/products/zen/ZEN-4.JPG",
+                    "/products/zen/ZEN-5.JPG", "/products/zen/ZEN-6.JPG", "/products/zen/ZEN-7.JPG", "/products/zen/ZEN-8.JPG",
+                    "/products/zen/ZEN-9.JPG", "/products/zen/ZEN-10.JPG", "/products/zen/ZEN-11.JPG", "/products/zen/ZEN-12.JPG",
+                    "/products/zen/ZEN-13.JPG", "/products/zen/ZEN-14.JPG"
+                ]
             },
             {
                 id: "vera-serisi",
                 title: "VERA Serisi",
                 description: "Modern tasarımlar için ideal, polar astar özellikli yüksek kaliteli perdelik kumaş serisi. (360 gsm, 142 cm)",
                 price: "",
-                image: "/products/vera.jpg"
+                image: "/products/vera.jpg",
+                variants: [
+                    "/products/vera/V-01.JPG", "/products/vera/V-02.JPG", "/products/vera/V-03.JPG", "/products/vera/V-04.JPG",
+                    "/products/vera/V-05.JPG", "/products/vera/V-06.JPG", "/products/vera/V-07.JPG", "/products/vera/V-08.JPG",
+                    "/products/vera/V-09.JPG", "/products/vera/V-10.JPG", "/products/vera/V-11.JPG", "/products/vera/V-12.JPG",
+                    "/products/vera/V-13.JPG", "/products/vera/V-14.JPG", "/products/vera/V-15.JPG", "/products/vera/V-16.JPG",
+                    "/products/vera/V-17.JPG", "/products/vera/V-18.JPG", "/products/vera/V-19.JPG"
+                ]
             },
             {
                 id: "babyface-serisi",
                 title: "BABYFACE Serisi",
                 description: "Yumuşak dokusu ve polar astarı ile konfor ve dayanıklılığı bir araya getiren özel seri. (310 gsm, 142 cm)",
                 price: "",
-                image: "/products/babyface.jpg"
+                image: "/products/babyface.jpg",
+                variants: [
+                    "/products/babyface/V-01.JPG", "/products/babyface/V-02.JPG", "/products/babyface/V-03.JPG", "/products/babyface/V-04.JPG",
+                    "/products/babyface/V-05.JPG", "/products/babyface/V-06.JPG", "/products/babyface/V-07.JPG", "/products/babyface/V-08.JPG",
+                    "/products/babyface/V-09.JPG", "/products/babyface/V-10.JPG", "/products/babyface/V-11.JPG", "/products/babyface/V-12.JPG",
+                    "/products/babyface/V-14.JPG", "/products/babyface/V-15.JPG", "/products/babyface/V-17.JPG", "/products/babyface/V-18.JPG",
+                    "/products/babyface/V-20.JPG", "/products/babyface/V-21.JPG", "/products/babyface/V-22.JPG", "/products/babyface/V-23.JPG",
+                    "/products/babyface/V-24.JPG", "/products/babyface/V-25.JPG", "/products/babyface/V-26.JPG", "/products/babyface/V-27.JPG",
+                    "/products/babyface/V-28.JPG", "/products/babyface/V-29.JPG", "/products/babyface/V-37.JPG"
+                ]
             },
             {
                 id: "anka-serisi",
                 title: "ANKA Serisi",
                 description: "Entegre tesislerde perdelik kumaş üretimi ile uzun ömürlü ve şık çözümler. (360 gsm, 142 cm)",
                 price: "",
-                image: "/products/anka.jpg"
+                image: "/products/anka.jpg",
+                variants: [
+                    "/products/anka/V-01.JPG", "/products/anka/V-02.JPG", "/products/anka/V-03.JPG", "/products/anka/V-04.JPG",
+                    "/products/anka/V-05.JPG", "/products/anka/V-06.JPG", "/products/anka/V-07.JPG", "/products/anka/V-08.JPG",
+                    "/products/anka/V-09.JPG", "/products/anka/V-10.JPG", "/products/anka/V-11.JPG", "/products/anka/V-12.JPG",
+                    "/products/anka/V-13.JPG", "/products/anka/V-14.JPG", "/products/anka/V-15.JPG", "/products/anka/V-16.JPG",
+                    "/products/anka/V-17.JPG", "/products/anka/V-18.JPG", "/products/anka/V-19.JPG", "/products/anka/V-20.JPG",
+                    "/products/anka/V-21.JPG", "/products/anka/V-22.JPG", "/products/anka/V-23.JPG", "/products/anka/V-24.JPG",
+                    "/products/anka/V-25.JPG"
+                ]
             }
         ]
     }
