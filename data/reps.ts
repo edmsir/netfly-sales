@@ -247,7 +247,7 @@ export const reps = [
         company: "By Malzeme",
         companyLogo: "/branding/bymalzeme_final.png",
         bio: "Teknik malzeme, aksesuar ve hırdavat ürünlerinde uzman kadromuzla yanınızdayız.",
-        profileImage: "https://ui-avatars.com/api/?name=Oguzhan+Balci&background=2563eb&color=fff&size=512",
+        profileImage: "/reps/oguzhan-balci.jpeg",
         contactInfo: { phone: "+90 545 278 12 75", whatsapp: "905452781275" },
         products: materialProducts
     },
