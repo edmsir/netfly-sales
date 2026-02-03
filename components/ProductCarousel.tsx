@@ -86,15 +86,19 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                                         fill
                                                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                         sizes="(max-width: 768px) 25vw, 15vw"
-                                                        quality={60}
+                                                        quality={50}
                                                     />
                                                 </div>
                                             ))}
                                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <div className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-full font-bold text-sm">
-                                                    <Maximize2 className="w-4 h-4" />
-                                                    Tüm Renkleri Gör
+                                                <div className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-full font-bold text-xs">
+                                                    <Maximize2 className="w-3 h-3" />
+                                                    Koltuk Kartelası
                                                 </div>
+                                            </div>
+                                            {/* Variant ID Label on Hover */}
+                                            <div className="absolute top-2 left-2 px-2 py-1 bg-black/80 backdrop-blur-md rounded-lg text-[10px] font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 border border-white/10 uppercase tracking-tighter">
+                                                {product.title.split(' ')[0]} SERİSİ
                                             </div>
                                         </div>
                                     ) : (
@@ -104,6 +108,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                             fill
                                             className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            quality={50}
                                         />
                                     )}
 
@@ -177,12 +182,16 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-500"
                                             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                            quality={75}
+                                            quality={50}
                                             loading="lazy"
                                         />
+                                        {/* Variant ID Tag Top-Left on Hover */}
+                                        <div className="absolute top-3 left-3 px-3 py-1 bg-black/80 backdrop-blur-md rounded-xl text-[10px] font-black text-rose-500 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-20 border border-rose-500/30 uppercase">
+                                            {variant.split('/').pop()?.split('.')[0] || `V-${idx + 1}`}
+                                        </div>
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="absolute bottom-4 left-4 text-white font-bold text-sm">
-                                                {variant.split('/').pop()?.split('.')[0] || `V-${idx + 1}`}
+                                            <div className="absolute bottom-4 left-4 text-white font-bold text-xs">
+                                                ByFabric Premium
                                             </div>
                                         </div>
                                     </div>
