@@ -28,7 +28,7 @@ export default function Home() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
     show: {
       opacity: 1,
@@ -36,7 +36,7 @@ export default function Home() {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   };
