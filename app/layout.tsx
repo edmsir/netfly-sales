@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Netfly Sales Platform",
-  description: "Profesyonel satış temsilcisi porfolyo platformu",
+  title: "ByFabric | Satış Platformu",
+  description: "Züccaciye ve döşemelik malzeme dünyasında profesyonel çözüm ortağınız.",
 };
 
 export default function RootLayout({

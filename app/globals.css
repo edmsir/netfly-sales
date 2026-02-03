@@ -4,10 +4,11 @@
   --color-primary: #3b82f6;
   --color-secondary: #1e293b;
   --color-accent: #60a5fa;
+  --color-fabric-pink: #e91e63;
   --color-card-bg: rgba(255, 255, 255, 0.03);
   --color-card-border: rgba(255, 255, 255, 0.1);
 
-  --background-image-premium-gradient: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent);
+  --background-image-premium-gradient: radial-gradient(circle at top right, rgba(233, 30, 99, 0.1), transparent);
 }
 
 :root {
