@@ -16,12 +16,62 @@ export default function Home() {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
+  // Staggered animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.5,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <main ref={containerRef} className="min-h-screen bg-black text-white selection:bg-rose-500/30 overflow-x-hidden">
-      {/* Dynamic Background */}
+    <main ref={containerRef} className="min-h-screen bg-[#020202] text-white selection:bg-rose-500/30 overflow-x-hidden">
+      {/* Dynamic Interactive Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(233,30,99,0.15)_0%,transparent_70%)] blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.1)_0%,transparent_70%)] blur-[120px]" />
+        {/* Animated Orbs */}
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)] blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 120, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)] blur-[120px]"
+        />
+
+        {/* Scanning Line Effect */}
+        <motion.div
+          animate={{ y: ["-100%", "200%"] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/[0.03] to-transparent h-[50%]"
+        />
+
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
       </div>
 
@@ -30,37 +80,40 @@ export default function Home() {
           style={{ opacity, scale }}
           className="max-w-5xl mx-auto text-center"
         >
-          {/* Logo Container */}
+          {/* Logo Container - Enhanced */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "circOut" }}
-            className="flex justify-center mb-8 md:mb-12"
+            initial={{ opacity: 0, y: -40, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center mb-12"
           >
-            <div className="relative h-32 w-80 md:h-40 md:w-[450px] bg-white/5 rounded-[40px] p-8 backdrop-blur-sm border border-white/5">
-              <Image
-                src="/branding/byfabric_final.png"
-                alt="ByFabric Logo"
-                fill
-                className="object-contain filter drop-shadow-[0_0_15px_rgba(233,30,99,0.3)] brightness-110"
-                priority
-              />
+            <div className="relative group">
+              <div className="absolute inset-0 bg-rose-500/20 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              <div className="relative h-32 w-80 md:h-44 md:w-[480px] bg-white/[0.03] rounded-[40px] p-10 backdrop-blur-xl border border-white/5 shadow-2xl">
+                <Image
+                  src="/branding/byfabric_final.png"
+                  alt="ByFabric Logo"
+                  fill
+                  className="object-contain filter drop-shadow-[0_0_25px_rgba(225,29,72,0.4)] brightness-110"
+                  priority
+                />
+              </div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 1 }}
           >
-            <h1 className="text-4xl md:text-6xl font-black mb-8 tracking-tight leading-tight">
-              Toptan & Perakende <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-500">Ev Tekstili & Mobilya</span><br />
-              <span className="text-zinc-400">Malzemelerinde Uzman Kadromuz</span>
+            <h1 className="text-5xl md:text-8xl font-[1000] mb-8 tracking-tighter leading-[0.9] uppercase italic">
+              Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 via-amber-500 to-rose-500 bg-[length:200%_auto] animate-gradient">Tekstil</span><br />
+              <span className="text-zinc-500/50">Çözümleri</span>
             </h1>
 
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 font-medium leading-relaxed mb-8 md:mb-12">
-              Koltuk döşemelik kumaşlar ve mobilya imalatı için gerekli tüm teknik <br className="hidden md:block" />
-              malzemeleri, tecrübeli ekibimizle kapınıza getiriyoruz.
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-zinc-400 font-bold leading-relaxed mb-12 tracking-tight">
+              Koltuk döşemelik kumaşlar ve mobilya imalatı için profesyonel <br className="hidden md:block" />
+              ekibimizle en trend koleksiyonları kapınıza getiriyoruz.
             </p>
           </motion.div>
 
@@ -68,54 +121,63 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="flex flex-col items-center gap-4"
+            transition={{ delay: 1.5, duration: 1 }}
+            className="flex flex-col items-center gap-6"
           >
-            <div className="w-px h-16 md:h-24 bg-gradient-to-b from-rose-500/50 to-transparent" />
-            <span className="text-zinc-600 text-xs font-bold uppercase tracking-[0.2em]">Temsilcilerimiz</span>
+            <div className="relative w-px h-24 bg-zinc-800">
+              <motion.div
+                animate={{ y: [0, 96, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-0 left-[-1px] w-[3px] h-8 bg-rose-500 blur-[2px]"
+              />
+            </div>
+            <span className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.5em]">Temsilcilerimiz</span>
           </motion.div>
         </motion.div>
 
-        {/* Reps Grid */}
-        <div className="w-full max-w-7xl mx-auto mt-16 md:mt-32 px-4">
+        {/* Reps Grid - Staggered */}
+        <div className="w-full max-w-7xl mx-auto mt-24 md:mt-48 px-4">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
           >
             {(reps as any[]).map((rep) => (
-              <RepCard
-                key={rep.id}
-                username={rep.username}
-                name={rep.name}
-                title={rep.title}
-                branch={rep.branch}
-                image={rep.profileImage}
-                phone={rep.contactInfo.phone}
-              />
+              <motion.div key={rep.id} variants={itemVariants}>
+                <RepCard
+                  username={rep.username}
+                  name={rep.name}
+                  title={rep.title}
+                  branch={rep.branch}
+                  image={rep.profileImage}
+                  phone={rep.contactInfo.phone}
+                  logoSrc={rep.companyLogo}
+                />
+              </motion.div>
             ))}
           </motion.div>
         </div>
 
         {/* Improved Footer */}
-        <footer className="mt-20 md:mt-40 py-8 md:py-12 border-t border-white/5 w-full">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-4">
-              <div className="h-8 w-24 relative opacity-50 grayscale hover:grayscale-0 transition-all cursor-pointer">
+        <footer className="mt-32 md:mt-64 py-16 border-t border-white/5 w-full bg-white/[0.01]">
+          <div className="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <div className="h-10 w-32 relative opacity-30 grayscale hover:grayscale-0 transition-all cursor-pointer">
                 <Image src="/branding/byfabric_final.png" alt="ByFabric" fill className="object-contain" />
               </div>
-              <span className="text-zinc-600 text-sm">| Professional Sales Platform</span>
+              <p className="text-zinc-700 text-[10px] font-black tracking-widest uppercase">Professional Sales Ecosystem</p>
             </div>
 
-            <p className="text-zinc-500 text-sm font-medium">
-              © {new Date().getFullYear()} ByFabric. Tüm hakları saklıdır.
+            <p className="text-zinc-600 text-xs font-bold tracking-tight">
+              © {new Date().getFullYear()} BYFABRIC. GLOBAL TEXTILE SOLUTIONS.
             </p>
 
-            <div className="flex gap-6">
-              <a href="#" className="text-zinc-600 hover:text-rose-500 transition-colors text-xs font-bold uppercase tracking-wider">Gizlilik Politikası</a>
-              <a href="#" className="text-zinc-600 hover:text-rose-500 transition-colors text-xs font-bold uppercase tracking-wider">İletişim</a>
+            <div className="flex gap-8">
+              {['Gizlilik', 'İletişim', 'Katalog'].map((link) => (
+                <a key={link} href="#" className="text-zinc-700 hover:text-rose-500 transition-all text-[10px] font-black uppercase tracking-[0.2em]">{link}</a>
+              ))}
             </div>
           </div>
         </footer>

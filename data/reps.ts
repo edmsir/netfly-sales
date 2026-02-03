@@ -240,14 +240,14 @@ export const reps = [
     // 5. MALZEME (By Malzeme - Bursa/İnegöl Malzeme Şube)
     {
         id: "rep-oguzhan-balci",
-        username: "oguzhan-balci",
+        username: "oguzhan-bagci",
         name: "Oğuzhan Bağcı",
         title: "Satış Temsilcisi",
         branch: "Bursa/İnegöl Malzeme Şube",
         company: "By Malzeme",
         companyLogo: "/branding/bymalzeme_final.png",
         bio: "Teknik malzeme, aksesuar ve hırdavat ürünlerinde uzman kadromuzla yanınızdayız.",
-        profileImage: "/reps/oguzhan_final.jpeg",
+        profileImage: "https://ui-avatars.com/api/?name=Oguzhan+Bagci&background=2563eb&color=fff&size=512",
         contactInfo: { phone: "+90 545 278 12 75", whatsapp: "905452781275" },
         products: materialProducts
     },
