@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { ChevronLeft, ChevronRight, ShoppingBag, X, Maximize2 } from "lucide-react";
+import { ShoppingBag, X, Maximize2 } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -22,20 +22,31 @@ interface ProductCarouselProps {
 
 export function ProductCarousel({ products }: ProductCarouselProps) {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+    // Duplicate products to ensure smooth infinite scrolling without gaps
+    // Embla needs enough content to cover the viewport + buffer for seamless looping
+    const loopCount = products.length < 6 ? 4 : 2;
+    const items = Array(loopCount).fill(products).flat();
+
     const [emblaRef, emblaApi] = useEmblaCarousel(
-        { loop: true, align: "start" },
-        [AutoScroll({ speed: 2, stopOnInteraction: false, stopOnMouseEnter: true })]
+        {
+            loop: true,
+            align: "start", // 'start' usually prevents gaps better than 'center' for continuous loops
+            dragFree: true,
+            skipSnaps: false,
+            containScroll: false // key for infinite loop without gaps
+        },
+        [
+            AutoScroll({
+                speed: 2, // Faster speed
+                stopOnInteraction: false, // Don't stop permanently on drag
+                stopOnMouseEnter: true, // Pause on hover
+                stopOnFocusIn: false
+            })
+        ]
     );
 
-    const scrollPrev = useCallback(() => {
-        if (emblaApi) emblaApi.scrollPrev();
-    }, [emblaApi]);
-
-    const scrollNext = useCallback(() => {
-        if (emblaApi) emblaApi.scrollNext();
-    }, [emblaApi]);
-
-    if (!products || products.length === 0) return null;
+    // No need for manual interval anymore, AutoScroll handles continuous flow
 
     return (
         <div className="relative py-12">
@@ -46,29 +57,30 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     </h2>
                     <p className="text-zinc-400 font-medium italic">Seçkin ürün listemiz ve güncel stok bilgileri.</p>
                 </div>
-
-                <div className="flex gap-3 mt-6 md:mt-0">
-                    <button
-                        onClick={scrollPrev}
-                        className="bg-white/5 hover:bg-white/10 text-white p-4 rounded-2xl border border-white/10 transition-all hover:scale-105"
-                    >
-                        <ChevronLeft className="w-6 h-6" />
-                    </button>
-                    <button
-                        onClick={scrollNext}
-                        className="bg-white/5 hover:bg-white/10 text-white p-4 rounded-2xl border border-white/10 transition-all hover:scale-105"
-                    >
-                        <ChevronRight className="w-6 h-6" />
-                    </button>
-                </div>
             </div>
 
-            <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-                <div className="flex -ml-6">
-                    {products.map((product) => (
-                        <div
-                            key={product.id}
-                            className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0 transform-gpu backface-hidden"
+            <div className="overflow-hidden" ref={emblaRef}>
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    variants={{
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.1
+                            }
+                        }
+                    }}
+                    className="flex -ml-6"
+                >
+                    {items.map((product, index) => (
+                        <motion.div
+                            key={`${product.id}-${index}`}
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                            }}
+                            className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0"
                         >
                             <div className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-rose-500/30 transition-all duration-500 h-full">
                                 {/* Image / Collage Container */}
@@ -78,8 +90,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                 >
                                     {product.variants && product.variants.length > 0 ? (
                                         <div className="grid grid-cols-2 grid-rows-2 gap-2 h-full w-full">
-                                            {product.variants.slice(0, 4).map((variant, idx) => (
-                                                <div key={idx} className="relative w-full h-full rounded-xl overflow-hidden">
+                                            {product.variants.slice(0, 4).map((variant: string, idx: number) => (
+                                                <div key={idx} className="relative w-full h-full rounded-xl overflow-hidden bg-zinc-900 border border-white/5">
                                                     <Image
                                                         src={variant}
                                                         alt={`${product.title} variant ${idx}`}
@@ -87,6 +99,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                         sizes="(max-width: 768px) 25vw, 15vw"
                                                         quality={50}
+                                                        priority={index < 3}
+                                                        loading={index >= 3 ? "lazy" : undefined}
                                                     />
                                                 </div>
                                             ))}
@@ -96,7 +110,6 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                                     Koltuk Kartelası
                                                 </div>
                                             </div>
-                                            {/* Variant ID Label on Hover */}
                                             <div className="absolute top-2 left-2 px-2 py-1 bg-black/80 backdrop-blur-md rounded-lg text-[10px] font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 border border-white/10 uppercase tracking-tighter">
                                                 {product.title.split(' ')[0]} SERİSİ
                                             </div>
@@ -109,6 +122,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                             className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             quality={50}
+                                            priority={index < 3}
+                                            loading={index >= 3 ? "lazy" : undefined}
                                         />
                                     )}
 
@@ -138,9 +153,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
 
             {/* Gallery Modal */}
@@ -182,10 +197,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-500"
                                             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                            quality={50}
+                                            quality={40}
                                             loading="lazy"
                                         />
-                                        {/* Variant ID Tag Top-Left on Hover */}
                                         <div className="absolute top-3 left-3 px-3 py-1 bg-black/80 backdrop-blur-md rounded-xl text-[10px] font-black text-rose-500 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-20 border border-rose-500/30 uppercase">
                                             {variant.split('/').pop()?.split('.')[0] || `V-${idx + 1}`}
                                         </div>

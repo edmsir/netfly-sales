@@ -53,7 +53,7 @@ export default function Home() {
             scale: [1, 1.2, 1]
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)] blur-[120px]"
+          className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)] blur-[120px] will-change-transform"
         />
         <motion.div
           animate={{
@@ -62,7 +62,7 @@ export default function Home() {
             scale: [1, 1.1, 1]
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)] blur-[120px]"
+          className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)] blur-[120px] will-change-transform"
         />
 
         {/* Scanning Line Effect */}
@@ -89,12 +89,26 @@ export default function Home() {
           >
             <div className="relative group">
               <div className="absolute inset-0 bg-rose-500/20 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-              <div className="relative h-32 w-80 md:h-44 md:w-[480px] bg-white/[0.03] rounded-[40px] p-10 backdrop-blur-xl border border-white/5 shadow-2xl">
+              <div className="relative h-28 w-64 md:h-44 md:w-[480px] flex items-center justify-center overflow-visible">
+                {/* Refined Subtle Breathing Glow Layer */}
+                <motion.div
+                  animate={{
+                    opacity: [0.08, 0.2, 0.08],
+                    scale: [0.98, 1.05, 0.98]
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute inset-x-0 inset-y-8 bg-white blur-[60px] rounded-full pointer-events-none"
+                />
+
                 <Image
-                  src="/branding/byfabric_final.png"
+                  src="/branding/byfabric.PNG"
                   alt="ByFabric Logo"
                   fill
-                  className="object-contain filter drop-shadow-[0_0_25px_rgba(225,29,72,0.4)] brightness-110"
+                  className="relative z-10 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] brightness-105"
                   priority
                 />
               </div>
@@ -142,9 +156,9 @@ export default function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
           >
-            {(reps as any[]).map((rep) => (
+            {reps.map((rep) => (
               <motion.div key={rep.id} variants={itemVariants}>
                 <RepCard
                   username={rep.username}
@@ -165,7 +179,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
             <div className="flex flex-col items-center md:items-start gap-4">
               <div className="h-10 w-32 relative opacity-30 grayscale hover:grayscale-0 transition-all cursor-pointer">
-                <Image src="/branding/byfabric_final.png" alt="ByFabric" fill className="object-contain" />
+                <Image src="/branding/byfabric.PNG" alt="ByFabric" fill className="object-contain" />
               </div>
               <p className="text-zinc-700 text-[10px] font-black tracking-widest uppercase">Professional Sales Ecosystem</p>
             </div>
