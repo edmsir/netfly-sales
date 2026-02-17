@@ -31,15 +31,21 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                 fontFamily: 'sans-serif'
             }}
         >
-            {/* Background Decor */}
-            <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundColor: '#0a0a0a' }}
-            />
-            <div
-                className="absolute top-0 right-0 w-1/2 h-full pointer-events-none"
-                style={{ backgroundColor: 'rgba(225, 29, 72, 0.05)' }}
-            />
+            {/* Premium Studio Background Layers */}
+            <div className="absolute inset-0 bg-[#050505]" />
+
+            {/* Soft Studio Lighting (Static) */}
+            <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[120%] bg-rose-500/10 blur-[120px] rounded-full" />
+            <div className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[100%] bg-blue-500/10 blur-[100px] rounded-full" />
+
+            {/* Subtle Diagonal Light Leak */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent rotate-12 opacity-50" />
+
+            {/* Professional Noise Texture Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+            {/* Vignette for Focus */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
 
             {/* Content Area */}
             <div className="relative z-10 flex w-full h-full p-12 gap-12 items-center">
@@ -47,12 +53,11 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                 <div className="relative flex-shrink-0 flex flex-col items-center gap-6">
                     <div className="relative w-44 h-44">
                         <div
-                            className="absolute inset-0 rounded-full scale-110"
-                            style={{ backgroundColor: 'rgba(225, 29, 72, 0.1)' }}
+                            className="absolute inset-0 rounded-full scale-110 bg-white/[0.03] blur-xl"
                         />
                         <div
-                            className="relative w-44 h-44 rounded-[40px] overflow-hidden border border-white/10"
-                            style={{ backgroundColor: '#000' }}
+                            className="relative w-44 h-44 rounded-[42px] overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+                            style={{ backgroundColor: '#050505' }}
                         >
                             <img
                                 src={image}
@@ -67,19 +72,19 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
 
                 {/* Details Section */}
                 <div className="flex flex-col flex-grow min-w-0 h-full justify-center">
-                    {/* Logo Area - Transparent with Refined Breathing Glow */}
+                    {/* Logo Area - Pure Transparent with Refined Breathing Glow */}
                     <div className="relative h-20 w-52 mb-6 flex items-center justify-center overflow-visible">
                         {/* Static Subtle Ambient Glow */}
-                        <div className="absolute inset-0 bg-white/[0.02] blur-2xl rounded-full" />
+                        <div className="absolute inset-0 bg-white/[0.01] blur-2xl rounded-full" />
 
                         <img
                             src={logoSrc}
                             alt={company}
                             crossOrigin="anonymous"
-                            className="relative z-10 max-h-full max-w-full object-contain brightness-105 animate-[pulse_4s_ease-in-out_infinite]"
+                            className="relative z-10 max-h-full max-w-full object-contain brightness-110 animate-[pulse_4s_ease-in-out_infinite]"
                             style={{
                                 display: 'block',
-                                filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.4))'
+                                filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.4))'
                             }}
                         />
                     </div>

@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function compressImage(imageUrl: string, quality = 0.7, maxWidth = 1200): Promise<string> {
+export async function compressImage(imageUrl: string, quality = 0.7, maxWidth = 1200, preserveTransparency = false): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -28,12 +28,18 @@ export async function compressImage(imageUrl: string, quality = 0.7, maxWidth = 
         return;
       }
 
-      ctx.fillStyle = "#FFFFFF"; // Fill with white background for JPEGs (handling transparency)
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      if (preserveTransparency) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      } else {
+        ctx.fillStyle = "#FFFFFF"; // Fill with white background for JPEGs
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
       ctx.drawImage(img, 0, 0, width, height);
 
-      // Convert to JPEG for better compression
-      const dataUrl = canvas.toDataURL("image/jpeg", quality);
+      // Convert to appropriate format
+      const mimeType = preserveTransparency ? "image/png" : "image/jpeg";
+      const dataUrl = canvas.toDataURL(mimeType, quality);
       resolve(dataUrl);
     };
     img.onerror = (error) => reject(error);

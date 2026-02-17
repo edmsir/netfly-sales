@@ -29,14 +29,23 @@ export default function RepPage({ params }: { params: Promise<{ username: string
   const [isSharing, setIsSharing] = useState(false);
   const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
+  const [profileDataUrl, setProfileDataUrl] = useState<string>("");
+  const [logoDataUrl, setLogoDataUrl] = useState<string>("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (!rep) return;
 
-    // Generate QR code on mount
-    const generateQR = async () => {
-      if (!rep) return;
+    // Pre-load images as base64 to ensure they are available for PDF/Card capture
+    const preloadResources = async () => {
       try {
+        const { compressImage } = await import('@/lib/utils');
+        const pUrl = await compressImage(rep.profileImage, 0.7, 400);
+        const lUrl = await compressImage(rep.companyLogo, 0.7, 400, true);
+        setProfileDataUrl(pUrl);
+        setLogoDataUrl(lUrl);
+
+        // Also generate QR code
         const QRCode = (await import('qrcode')).default;
         const url = await QRCode.toDataURL(
           `https://byfabric.netlify.app/${rep.username}`,
@@ -44,11 +53,11 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         );
         setQrDataUrl(url);
       } catch (err) {
-        console.error("Failed to generate QR code:", err);
+        console.error("Failed to preload resources:", err);
       }
     };
-    generateQR();
-  }, [username]);
+    preloadResources();
+  }, [rep?.username, rep?.profileImage, rep?.companyLogo]);
 
   if (!rep) {
     notFound();
@@ -210,28 +219,31 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             </motion.div>
           </div>
 
-          {/* Business Card (HIDDEN for capture - using extreme off-screen instead of hidden for rendering accuracy) */}
+          {/* Business Card Section is now hidden in the UI - Only used for Capture/PDF */}
+
+          {/* Hidden Business Card for Capture - Using absolute off-screen positioning for rendering accuracy */}
           <div
-            id="business-card-capture-container"
-            className="fixed top-0 left-0 pointer-events-none"
+            className="fixed left-[-9999px] top-0 pointer-events-none"
             style={{
               width: '800px',
               height: '450px',
-              zIndex: -100,
-              opacity: 0.01,
-              backgroundColor: '#0a0a0a'
+              opacity: 1,
+              visibility: 'visible',
+              backgroundColor: '#050505'
             }}
           >
-            <BusinessCard
-              name={rep.name}
-              title={rep.title}
-              branch={rep.branch}
-              phone={rep.contactInfo.phone}
-              image={rep.profileImage}
-              logoSrc={rep.companyLogo}
-              company={rep.company}
-              qrCodeDataUrl={qrDataUrl}
-            />
+            <div id="business-card-capture-target" style={{ width: '800px', height: '450px' }}>
+              <BusinessCard
+                name={rep.name}
+                title={rep.title}
+                branch={rep.branch}
+                phone={rep.contactInfo.phone}
+                image={profileDataUrl || rep.profileImage}
+                logoSrc={logoDataUrl || rep.companyLogo}
+                company={rep.company}
+                qrCodeDataUrl={qrDataUrl}
+              />
+            </div>
           </div>
 
           {/* Sharing Section */}
@@ -259,6 +271,9 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                     `https://byfabric.netlify.app/${rep.username}`,
                     { width: 300, margin: 2 }
                   );
+
+                  // Compress logo with transparency
+                  const logoDataUrlTransparent = await compressImage(rep.companyLogo, 0.8, 600, true);
 
                   // Compress product images
                   const compressedProducts = await Promise.all(
@@ -297,9 +312,9 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                       repBranch={rep.branch}
                       repPhone={rep.contactInfo.phone}
                       repCompany={rep.company}
-                      repProfileImage={rep.profileImage}
-                      companyLogo={rep.companyLogo}
-                      profileUrl={`byfabric.netlify.app/${rep.username}`}
+                      repProfileImage={profileDataUrl || rep.profileImage}
+                      companyLogo={logoDataUrlTransparent || logoDataUrl || rep.companyLogo}
+                      profileUrl={`https://byfabric.netlify.app/${rep.username}`}
                       products={compressedProducts as any}
                       qrCodeDataUrl={qrDataUrl}
                     />
@@ -336,7 +351,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   // Lazy load html-to-image only when needed (reduces initial bundle)
                   const htmlToImage = await import('html-to-image');
 
-                  const container = document.getElementById('business-card-capture-container');
+                  const container = document.getElementById('business-card-capture-target');
                   if (!container) throw new Error('Card not found');
 
                   // Add much longer delay for final attempt to ensure all images/fonts are rock solid
@@ -344,10 +359,10 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
                   const dataUrl = await htmlToImage.toPng(container, {
                     quality: 1.0,
-                    pixelRatio: 3,
+                    pixelRatio: 2, // 2 is usually enough and more stable than 4
                     cacheBust: true,
-                    backgroundColor: '#0a0a0a',
-                    skipFonts: false,
+                    backgroundColor: '#050505',
+                    fontEmbedCSS: '',
                     style: {
                       opacity: '1',
                       visibility: 'visible',
