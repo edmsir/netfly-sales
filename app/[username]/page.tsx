@@ -48,7 +48,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
       }
     };
     generateQR();
-  }, [rep.username]);
+  }, [username]);
 
   if (!rep) {
     notFound();
