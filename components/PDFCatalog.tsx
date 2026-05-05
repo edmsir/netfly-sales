@@ -1,230 +1,203 @@
-import React from 'react';
-import { Document, Page, Text, View, StyleSheet, Image as PDFImage, Link, Font } from '@react-pdf/renderer';
 
-// Register fonts for Turkish character support using Google Fonts CDN
+import React from 'react';
+import { Document, Page, Text, View, StyleSheet, Image as PDFImage, Font } from '@react-pdf/renderer';
+
+// Register fonts
+const getFontPath = (p: string) => {
+    if (typeof window === 'undefined') {
+        return require('path').join(process.cwd(), 'public', p);
+    }
+    return p;
+};
+
 Font.register({
     family: 'Roboto',
     fonts: [
-        {
-            src: '/fonts/Roboto-Regular.ttf',
-            fontWeight: 'normal',
-        },
-        {
-            src: '/fonts/Roboto-Bold.ttf',
-            fontWeight: 'bold',
-        },
+        { src: getFontPath('/fonts/Roboto-Regular.ttf'), fontWeight: 'normal' },
+        { src: getFontPath('/fonts/Roboto-Bold.ttf'), fontWeight: 'bold' },
     ],
 });
 
-// Helper to extract variant name from path (e.g. "/products/luna/01.JPG" -> "01")
-const getVariantCode = (path: string) => {
-    try {
-        const filename = path.split('/').pop() || "";
-        return filename.split('.')[0].replace(/-/g, ' ');
-    } catch (e) {
-        return "";
-    }
-};
-
-// Define styles
 const styles = StyleSheet.create({
     page: {
-        backgroundColor: '#0a0a0a',
-        padding: 0,
+        backgroundColor: '#050505',
+        color: '#ffffff',
         fontFamily: 'Roboto',
     },
-    // ... (other styles remain same)
-
-
-
-    businessCardPage: {
+    // Cover Page
+    coverPage: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#0a0a0a',
-        padding: 40,
+        padding: 60,
+        position: 'relative',
     },
-    card: {
-        backgroundColor: '#111',
-        borderRadius: 20,
-        padding: 40,
-        width: '80%',
-        maxWidth: 400,
-        border: '1px solid #333',
-        alignItems: 'center',
+    coverAccent: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 10,
+        backgroundColor: '#e11d48',
     },
-    profileImage: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        marginBottom: 20,
-        objectFit: 'cover',
-        border: '3px solid #e11d48',
-    },
-    logo: {
-        width: 140,
-        height: 60,
-        marginBottom: 25,
+    coverLogo: {
+        width: 180,
+        marginBottom: 40,
         objectFit: 'contain',
     },
-    name: {
-        fontSize: 28,
+    coverProfile: {
+        width: 160,
+        height: 160,
+        borderRadius: 80,
+        border: '4px solid #e11d48',
+        marginBottom: 30,
+        objectFit: 'cover',
+    },
+    coverTitle: {
+        fontSize: 42,
+        fontWeight: 'bold',
+        letterSpacing: 2,
+        marginBottom: 10,
+        textTransform: 'uppercase',
+    },
+    coverSubtitle: {
+        fontSize: 16,
+        color: '#9ca3af',
+        letterSpacing: 4,
+        marginBottom: 40,
+        textTransform: 'uppercase',
+    },
+    coverFooter: {
+        borderTop: '1px solid #333',
+        paddingTop: 20,
+        width: '60%',
+        alignItems: 'center',
+    },
+    coverRepName: {
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#ffffff',
-        marginBottom: 8,
-        textAlign: 'center',
+        marginBottom: 5,
     },
-    title: {
+    coverRepTitle: {
         fontSize: 12,
         color: '#e11d48',
-        marginBottom: 6,
-        textAlign: 'center',
-        textTransform: 'uppercase',
-        letterSpacing: 1.5,
     },
-    branch: {
-        fontSize: 11,
-        color: '#9ca3af',
-        marginBottom: 25,
-        textAlign: 'center',
+
+    // Layout
+    sectionPage: {
+        padding: 30,
     },
-    contactSection: {
-        marginBottom: 25,
-    },
-    contactRow: {
+    sectionHeader: {
+        marginBottom: 20,
         flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 10,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        borderBottom: '1px solid #333',
+        paddingBottom: 15,
     },
-    contactIcon: {
-        fontSize: 14,
-        marginRight: 8,
+    sectionTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        color: '#e11d48',
     },
-    contactText: {
-        fontSize: 12,
-        color: '#ffffff',
-    },
-    qrSection: {
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    qrCode: {
-        width: 100,
-        height: 100,
-        marginBottom: 8,
-    },
-    qrUrl: {
+    sectionSubtitle: {
         fontSize: 9,
         color: '#9ca3af',
     },
-    catalogPage: {
-        padding: 40,
-    },
-    header: {
-        marginBottom: 25,
-        borderBottom: '2px solid #333',
-        paddingBottom: 15,
-    },
-    catalogTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#ffffff',
-        marginBottom: 4,
-    },
-    catalogSubtitle: {
-        fontSize: 11,
-        color: '#9ca3af',
-    },
-    productGrid: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 15,
-    },
-    productCard: {
-        width: '100%',
-        backgroundColor: '#111',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 20,
-        border: '1px solid #333',
-    },
-    productImage: {
-        width: '100%',
-        height: 150,
-        objectFit: 'cover',
-        borderRadius: 8,
-        marginBottom: 12,
-    },
-    productTitle: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        color: '#ffffff',
-        marginBottom: 6,
-    },
-    productDescription: {
-        fontSize: 8,
-        color: '#9ca3af',
-        marginBottom: 8,
-        lineHeight: 1.3,
-    },
+
+    // Fabric Variant Grid - Optimized to fit 30-36 items per page
     variantGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 3,
-        marginBottom: 8,
+        gap: 8,
     },
     variantItem: {
-        width: '18%', // 5 items per row
-        marginRight: '1%',
-        marginBottom: 8,
-        position: 'relative',
-        height: 60,
+        width: '15%', // 6 items per row
+        marginBottom: 10,
+        backgroundColor: '#111',
+        borderRadius: 6,
+        padding: 3,
+        border: '1px solid #222',
     },
     variantImage: {
         width: '100%',
-        height: '100%',
+        height: 60,
         objectFit: 'cover',
         borderRadius: 4,
     },
-    variantCodeOverlay: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: 'rgba(0,0,0,0.6)',
-        padding: 2,
-        borderBottomLeftRadius: 4,
-        borderBottomRightRadius: 4,
-    },
-    variantCode: {
-        fontSize: 7,
-        color: '#ffffff',
+    variantLabel: {
+        fontSize: 6,
         textAlign: 'center',
+        marginTop: 4,
         fontWeight: 'bold',
-        fontFamily: 'Roboto',
+        color: '#9ca3af',
     },
 
-    productPrice: {
-        fontSize: 10,
-        color: '#e11d48',
-        fontWeight: 'bold',
+    // Material Grid Layout
+    materialGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 12,
     },
+    materialCard: {
+        width: '19%', // 5 items per row
+        backgroundColor: '#0f0f0f',
+        borderRadius: 10,
+        padding: 8,
+        border: '1px solid #222',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    materialGridImage: {
+        width: '100%',
+        height: 80,
+        objectFit: 'cover',
+        borderRadius: 6,
+        marginBottom: 8,
+    },
+    materialGridTitle: {
+        fontSize: 8,
+        fontWeight: 'bold',
+        color: '#ffffff',
+        textAlign: 'center',
+        marginBottom: 4,
+    },
+    materialGridDesc: {
+        fontSize: 6,
+        color: '#9ca3af',
+        textAlign: 'center',
+        lineHeight: 1.2,
+    },
+
+    // Info
+    productInfo: {
+        marginTop: 10,
+        padding: 12,
+        backgroundColor: '#0f0f0f',
+        borderRadius: 8,
+        border: '1px solid #222',
+    },
+    productDesc: {
+        fontSize: 9,
+        lineHeight: 1.4,
+        color: '#9ca3af',
+    },
+
+    // Footer
     footer: {
         position: 'absolute',
-        bottom: 30,
-        left: 40,
-        right: 40,
-        textAlign: 'center',
-        fontSize: 8,
-        color: '#666',
-        borderTop: '1px solid #333',
-        paddingTop: 10,
-    },
-    pageNumber: {
-        fontSize: 8,
-        color: '#666',
-    },
+        bottom: 20,
+        left: 30,
+        right: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderTop: '1px solid #222',
+        paddingTop: 8,
+        fontSize: 7,
+        color: '#444',
+    }
 });
 
 export interface Product {
@@ -251,113 +224,114 @@ interface PDFCatalogProps {
 }
 
 export const PDFCatalog: React.FC<PDFCatalogProps> = ({
-    repName,
-    repTitle,
-    repBranch,
-    repPhone,
-    repCompany,
-    repProfileImage,
-    companyLogo,
-    profileUrl,
-    products,
-    qrCodeDataUrl,
+    repName, repTitle, repBranch, repPhone, repCompany,
+    repProfileImage, companyLogo, profileUrl, products, qrCodeDataUrl,
 }) => {
+    // Separate products
+    const fabricSeries = products.filter(p => p.variants && p.variants.length > 0);
+    const materialItems = products.filter(p => !p.variants || p.variants.length === 0);
+
+    // Chunk materials (24 per page to fit all 21 on one page)
+    const materialChunks = [];
+    for (let i = 0; i < materialItems.length; i += 24) {
+        materialChunks.push(materialItems.slice(i, i + 24));
+    }
+
     return (
         <Document>
-            {/* Page 1: Business Card */}
+            {/* Cover Page */}
             <Page size="A4" style={styles.page}>
-                <View style={styles.businessCardPage}>
-                    <View style={styles.card}>
-                        {repProfileImage && (
-                            <PDFImage
-                                src={repProfileImage}
-                                style={styles.profileImage}
-                            />
-                        )}
+                <View style={styles.coverPage}>
+                    <View style={styles.coverAccent} />
+                    {companyLogo && <PDFImage src={companyLogo} style={styles.coverLogo} />}
+                    {repProfileImage && <PDFImage src={repProfileImage} style={styles.coverProfile} />}
+                    
+                    <Text style={styles.coverTitle}>ÜRÜN KATALOĞU</Text>
+                    <Text style={styles.coverSubtitle}>2026 Koleksiyonu</Text>
 
-                        {companyLogo && (
-                            <PDFImage
-                                src={companyLogo}
-                                style={styles.logo}
-                            />
-                        )}
-
-                        <Text style={[styles.name, { fontFamily: 'Roboto' }]}>{repName}</Text>
-                        <Text style={[styles.title, { fontFamily: 'Roboto' }]}>{repTitle}</Text>
-                        {repBranch && <Text style={[styles.branch, { fontFamily: 'Roboto' }]}>{repBranch}</Text>}
-
-                        <View style={styles.contactSection}>
-                            <View style={styles.contactRow}>
-                                <Text style={styles.contactIcon}>📞</Text>
-                                <Text style={[styles.contactText, { fontFamily: 'Roboto' }]}>{repPhone}</Text>
-                            </View>
-                            <View style={styles.contactRow}>
-                                <Text style={styles.contactIcon}>💬</Text>
-                                <Text style={styles.contactText}>WhatsApp</Text>
-                            </View>
-                        </View>
-
-                        {qrCodeDataUrl && (
-                            <View style={styles.qrSection}>
-                                <PDFImage
-                                    src={qrCodeDataUrl}
-                                    style={styles.qrCode}
-                                />
-                                <Text style={[styles.qrUrl, { fontFamily: 'Roboto' }]}>{profileUrl}</Text>
-                            </View>
-                        )}
+                    <View style={styles.coverFooter}>
+                        <Text style={styles.coverRepName}>{repName}</Text>
+                        <Text style={styles.coverRepTitle}>{repTitle}</Text>
+                        <Text style={{ fontSize: 10, color: '#666', marginTop: 10 }}>{repBranch}</Text>
+                        <Text style={{ fontSize: 10, color: '#666', marginTop: 5 }}>{repPhone}</Text>
                     </View>
+
+                    {qrCodeDataUrl && (
+                        <View style={{ marginTop: 40, alignItems: 'center' }}>
+                            <PDFImage src={qrCodeDataUrl} style={{ width: 80, height: 80, marginBottom: 5 }} />
+                            <Text style={{ fontSize: 7, color: '#444' }}>Dijital Kartvizit İçin Taratın</Text>
+                        </View>
+                    )}
                 </View>
             </Page>
 
-            {/* Page 2+: Product Catalog */}
-            {products && products.length > 0 && products.map((product, index) => (
-                <Page key={product.id} size="A4" style={[styles.catalogPage, { fontFamily: 'Roboto' }]}>
-                    <View style={styles.header}>
-                        <Text style={[styles.catalogTitle, { fontFamily: 'Roboto' }]}>ÜRÜN PORTFÖYÜ</Text>
-                        <Text style={[styles.catalogSubtitle, { fontFamily: 'Roboto' }]}>
-                            {repName} - {repCompany || 'ByFabric'}
-                        </Text>
-                    </View>
-
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        {/* Check if it's a fabric product (has variants) or material (no variants) */}
-                        {product.variants && product.variants.length > 0 ? (
-                            <View style={{ width: '100%' }}>
-                                <Text style={[styles.productTitle, { fontSize: 18, marginBottom: 10, textAlign: 'center', fontFamily: 'Roboto' }]}>{product.title}</Text>
-                                <View style={styles.variantGrid}>
-                                    {product.variants.map((variant, idx) => (
-                                        <View key={idx} style={styles.variantItem}>
-                                            <PDFImage
-                                                src={variant}
-                                                style={styles.variantImage}
-                                            />
-                                            <View style={styles.variantCodeOverlay}>
-                                                <Text style={[styles.variantCode, { fontFamily: 'Roboto' }]}>
-                                                    {product.variantNames?.[idx] || getVariantCode(variant)}
-                                                </Text>
-                                            </View>
-                                        </View>
-                                    ))}
+            {/* Fabric Series Pages (All variants on a single page per series) */}
+            {fabricSeries.map((product) => {
+                const variants = product.variants || [];
+                
+                return (
+                    <Page key={product.id} size="A4" style={styles.page}>
+                        <View style={styles.sectionPage}>
+                            <View style={styles.sectionHeader}>
+                                <View>
+                                    <Text style={styles.sectionTitle}>{product.title}</Text>
+                                    <Text style={styles.sectionSubtitle}>
+                                        {variants.length} Renk Seçeneği
+                                    </Text>
                                 </View>
-                                <Text style={[styles.productDescription, { fontSize: 10, textAlign: 'center', marginTop: 10, fontFamily: 'Roboto' }]}>{product.description}</Text>
-                                <Text style={[styles.productDescription, { fontSize: 10, textAlign: 'center', fontFamily: 'Roboto' }]}>{product.variants.length} renk seçeneği</Text>
+                                {companyLogo && <PDFImage src={companyLogo} style={{ width: 60, objectFit: 'contain' }} />}
                             </View>
-                        ) : (
-                            <View style={{ width: '100%', alignItems: 'center' }}>
-                                <PDFImage
-                                    src={product.image}
-                                    style={{ width: '100%', maxHeight: 400, objectFit: 'contain', marginBottom: 20, borderRadius: 8 }}
-                                />
-                                <Text style={[styles.productTitle, { fontSize: 20, marginBottom: 10, fontFamily: 'Roboto' }]}>{product.title}</Text>
-                                <Text style={[styles.productDescription, { fontSize: 12, textAlign: 'center', maxWidth: '80%', fontFamily: 'Roboto' }]}>{product.description}</Text>
+
+                            <View style={styles.variantGrid}>
+                                {variants.map((variant, idx) => (
+                                    <View key={idx} style={styles.variantItem}>
+                                        <PDFImage src={variant} style={styles.variantImage} />
+                                        <Text style={styles.variantLabel}>
+                                            {product.variantNames?.[idx] || `KOD-${idx + 1}`}
+                                        </Text>
+                                    </View>
+                                ))}
                             </View>
-                        )}
+
+                            <View style={styles.productInfo}>
+                                <Text style={styles.productDesc}>{product.description}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.footer}>
+                            <Text>© 2026 {repCompany || 'ByFabric'} | {repName}</Text>
+                            <Text>{product.title} - Koleksiyon</Text>
+                        </View>
+                    </Page>
+                );
+            })}
+
+            {/* Material Pages (Grid layout) */}
+            {materialChunks.map((chunk, cIdx) => (
+                <Page key={`material-${cIdx}`} size="A4" style={styles.page}>
+                    <View style={styles.sectionPage}>
+                        <View style={styles.sectionHeader}>
+                            <View>
+                                <Text style={styles.sectionTitle}>TEKNİK ÜRÜNLER</Text>
+                                <Text style={styles.sectionSubtitle}>Malzeme ve Aksesuar Çözümleri (Sayfa {cIdx + 1})</Text>
+                            </View>
+                            {companyLogo && <PDFImage src={companyLogo} style={{ width: 60, objectFit: 'contain' }} />}
+                        </View>
+
+                        <View style={styles.materialGrid}>
+                            {chunk.map((item) => (
+                                <View key={item.id} style={styles.materialCard}>
+                                    <PDFImage src={item.image} style={styles.materialGridImage} />
+                                    <Text style={styles.materialGridTitle}>{item.title}</Text>
+                                    <Text style={styles.materialGridDesc}>{item.description}</Text>
+                                </View>
+                            ))}
+                        </View>
                     </View>
 
-                    <View style={[styles.footer, { fontFamily: 'Roboto' }]}>
-                        <Text style={{ fontFamily: 'Roboto' }}>© 2026 ByFabric - Premium Tekstil Çözümleri</Text>
-                        <Text style={[styles.pageNumber, { fontFamily: 'Roboto' }]}>Sayfa {index + 2}</Text>
+                    <View style={styles.footer}>
+                        <Text>© 2026 {repCompany || 'ByFabric'} | {repName}</Text>
+                        <Text>Teknik Ürünler - Sayfa {cIdx + 1}</Text>
                     </View>
                 </Page>
             ))}

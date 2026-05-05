@@ -56,103 +56,179 @@ const fabricProducts = [
             "/products/babyface/V-24.JPG", "/products/babyface/V-25.JPG", "/products/babyface/V-26.JPG", "/products/babyface/V-27.JPG",
             "/products/babyface/V-28.JPG", "/products/babyface/V-29.JPG", "/products/babyface/V-37.JPG"
         ]
+    },
+    {
+        id: "anka-serisi",
+        title: "ANKA Serisi",
+        description: "Modern ve şık tasarımlar için üretilen, dayanıklı dokusu ve zengin renk seçenekleriyle öne çıkan premium döşemelik kumaş serisi. (340 gsm, 142 cm)",
+        price: "",
+        image: "/products/anka/V-01.JPG",
+        variants: [
+            "/products/anka/V-01.JPG", "/products/anka/V-02.JPG", "/products/anka/V-03.JPG", "/products/anka/V-04.JPG",
+            "/products/anka/V-05.JPG", "/products/anka/V-06.JPG", "/products/anka/V-07.JPG", "/products/anka/V-08.JPG",
+            "/products/anka/V-09.JPG", "/products/anka/V-10.JPG", "/products/anka/V-11.JPG", "/products/anka/V-12.JPG",
+            "/products/anka/V-13.JPG", "/products/anka/V-14.JPG", "/products/anka/V-15.JPG", "/products/anka/V-16.JPG",
+            "/products/anka/V-17.JPG", "/products/anka/V-18.JPG", "/products/anka/V-19.JPG", "/products/anka/V-20.JPG",
+            "/products/anka/V-21.JPG", "/products/anka/V-22.JPG", "/products/anka/V-23.JPG", "/products/anka/V-24.JPG",
+            "/products/anka/V-25.JPG"
+        ]
     }
 ];
 
 const materialProducts = [
     {
-        id: "prod-1",
-        title: "Akdeniz Sunta Vidası",
-        description: "Yüksek dayanımlı, mobilya ve ahşap montajı için optimize edilmiş profesyonel vidalar.",
+        id: "akdeniz-vida",
+        title: "Akdeniz Vida",
+        description: "Yüksek dayanımlı montaj vidası.",
         price: "",
         image: "/products/materials/akdenizvida.jpg"
     },
     {
-        id: "prod-2",
-        title: "Akdeniz Havalı Zımba Tabancası",
-        description: "Endüstriyel döşeme ve montaj işleri için seri ve güçlü havalı zımba sistemi.",
+        id: "akdeniz-zimba-tabancasi",
+        title: "Akdeniz Zımba Tabancası",
+        description: "Profesyonel döşeme zımba tabancası.",
         price: "",
         image: "/products/materials/akdenizzımbatbnc.jpg"
     },
     {
-        id: "prod-3",
-        title: "Çağ Zımba Telleri",
-        description: "Farklı ölçülerde, yüksek nüfuz kabiliyetli kaliteli döşeme zımbaları.",
-        price: "",
-        image: "/products/materials/cagzımba.png"
-    },
-    {
-        id: "prod-4",
-        title: "Delta Zımba Telleri",
-        description: "Hassas montaj işleri için ergonomik ve dayanıklı zımbalama çözümleri.",
-        price: "",
-        image: "/products/materials/deltazımba.jpg"
-    },
-    {
-        id: "prod-5",
-        title: "Elite Zımba Telleri",
-        description: "Premium segment montaj ve döşeme ekipmanları.",
-        price: "",
-        image: "/products/materials/elitzımba.jpg"
-    },
-    {
-        id: "prod-6",
-        title: "Elastik Kolon Simi NAT 307",
-        description: "NAT 307 elastik kolon, esneklik sağlayan dayanıklı bir dokuma şerit.",
-        price: "",
-        image: "/products/materials/nat-307.png"
-    },
-    {
-        id: "prod-9",
-        title: "Sefox Kontak Yapıştırıcı",
-        description: "Sünger, döşeme ve mobilya işleri için hızlı kuruyan üstün yapıştırıcı.",
-        price: "",
-        image: "/products/materials/sefox.png"
-    },
-    {
-        id: "prod-11",
+        id: "apel-tutkal",
         title: "Apel Tutkal",
-        description: "Mobilya ve ahşap işleri için yüksek mukavemetli profesyonel tutkal.",
+        description: "Güçlü yapıştırma özellikli endüstriyel tutkal.",
         price: "",
         image: "/products/materials/apeltutkal.jpeg"
     },
     {
-        id: "prod-15",
-        title: "CSS Lüx Makas Mekanizma",
-        description: "Modern koltuk ve kanepe tasarımları için sessiz ve dayanıklı lüks açılır mekanizma.",
+        id: "arda-yapistirici",
+        title: "Arda Yapıştırıcı",
+        description: "Yüksek performanslı döşeme yapıştırıcısı.",
+        price: "",
+        image: "/products/materials/arda.png"
+    },
+    {
+        id: "bls-205",
+        title: "BLS 205",
+        description: "Teknik bağlantı elemanı.",
+        price: "",
+        image: "/products/materials/bls 205.jpeg"
+    },
+    {
+        id: "bls-207",
+        title: "BLS 207",
+        description: "Teknik bağlantı elemanı.",
+        price: "",
+        image: "/products/materials/bls 207.png"
+    },
+    {
+        id: "bul-73",
+        title: "BUL 73",
+        description: "Endüstriyel hırdavat ürünü.",
+        price: "",
+        image: "/products/materials/bul 73.jpg"
+    },
+    {
+        id: "cag-zimba-teli",
+        title: "Çağ Zımba Teli",
+        description: "Profesyonel seri zımba teli.",
+        price: "",
+        image: "/products/materials/cagzımba.png"
+    },
+    {
+        id: "css-lux-mekanizma",
+        title: "CSS Lux Mekanizma",
+        description: "Lüks mobilya mekanizma çözümleri.",
         price: "",
         image: "/products/materials/cssluxmekanizma.jpg"
+    },
+    {
+        id: "doner-kare",
+        title: "Döner Kare",
+        description: "Döner koltuk mekanizması.",
+        price: "",
+        image: "/products/materials/dÖNER-kare.png"
+    },
+    {
+        id: "delta-zimba-teli",
+        title: "Delta Zımba Teli",
+        description: "Yüksek kaliteli döşeme zımba teli.",
+        price: "",
+        image: "/products/materials/deltazımba.jpg"
+    },
+    {
+        id: "elit-zimba-teli",
+        title: "Elit Zımba Teli",
+        description: "Yüksek kaliteli döşeme zımba teli.",
+        price: "",
+        image: "/products/materials/elitzımba.jpg"
+    },
+    {
+        id: "kumas-cizgi-tasi",
+        title: "Kumaş Çizgi Taşı",
+        description: "Tekstil işaretleme taşı.",
+        price: "",
+        image: "/products/materials/Kumaş çizgi taşı.jpeg"
+    },
+    {
+        id: "mitrapel-hizli-yapistirici",
+        title: "Mitrapel Hızlı Yapıştırıcı",
+        description: "Çift bileşenli hızlı yapıştırıcı seti.",
+        price: "",
+        image: "/products/materials/mitrapel hızlı yapıştırıcı.png"
+    },
+    {
+        id: "nat-307",
+        title: "NAT-307",
+        description: "Endüstriyel bağlantı çözümü.",
+        price: "",
+        image: "/products/materials/nat-307.png"
+    },
+    {
+        id: "pernix-zimba",
+        title: "Pernix",
+        description: "Profesyonel döşeme ekipmanı.",
+        price: "",
+        image: "/products/materials/pernix.png"
+    },
+    {
+        id: "sefox-yapistirici",
+        title: "Sefox",
+        description: "Endüstriyel temas yapıştırıcısı.",
+        price: "",
+        image: "/products/materials/sefox.png"
+    },
+    {
+        id: "sehpa-mekanizmasi",
+        title: "Sehpa Mekanizması",
+        description: "Akıllı sehpa mekanizma sistemleri.",
+        price: "",
+        image: "/products/materials/sehpa makenizması.jpg"
+    },
+    {
+        id: "standart-vida",
+        title: "Standart Vida",
+        description: "Genel kullanım montaj vidası.",
+        price: "",
+        image: "/products/materials/stdvida.jpg"
+    },
+    {
+        id: "tomax-yildiz",
+        title: "Tomax Yıldız",
+        description: "Teknik hırdavat parçası.",
+        price: "",
+        image: "/products/materials/tomax-yildiz.png"
+    },
+    {
+        id: "baglanti-parcasi",
+        title: "Bağlantı Elemanı",
+        description: "Özel amaçlı montaj parçası.",
+        price: "",
+        image: "/products/materials/8c1c54fa-73a3-4be7-a183-c526672631ca.jpg"
     }
 ];
 
+const allProducts = [...fabricProducts, ...materialProducts];
+
 export const reps = [
     // 1. MERKEZ
-    {
-        id: "rep-ibrahim",
-        username: "ibrahim-kahriman",
-        name: "İbrahim Kahrıman",
-        title: "Müşteri Satış Yetkilisi",
-        branch: "İstanbul Merkez Ofis",
-        company: "ByFabric",
-        companyLogo: "/branding/byfabric.PNG",
-        bio: "Döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
-        profileImage: "/reps/default-avatar.png",
-        contactInfo: { phone: "+90 554 165 39 30", whatsapp: "905541653930" },
-        products: fabricProducts
-    },
-    {
-        id: "rep-emre",
-        username: "emre-serbetci",
-        name: "Emre Şerbetçi",
-        title: "Müşteri Satış Yetkilisi",
-        branch: "İstanbul Merkez Ofis",
-        company: "ByFabric",
-        companyLogo: "/branding/byfabric.PNG",
-        bio: "Geniş ürün yelpazemiz ve profesyonel ekibimizle döşemelik kumaş çözümleri sunuyoruz.",
-        profileImage: "/reps/emre-şerbetci.png",
-        contactInfo: { phone: "+90 554 653 37 22", whatsapp: "905546533722" },
-        products: fabricProducts
-    },
     {
         id: "rep-hasan",
         username: "hasan-cakar",
@@ -164,6 +240,45 @@ export const reps = [
         bio: "İstanbul merkez ofisimizde döşemelik kumaş çözümlerinde profesyonel hizmet sunuyoruz.",
         profileImage: "/reps/hasan-cakar.png",
         contactInfo: { phone: "+90 554 165 39 32", whatsapp: "905541653932" },
+        products: fabricProducts
+    },
+    {
+        id: "rep-ibrahim",
+        username: "ibrahim-kahriman",
+        name: "İbrahim Kahrıman",
+        title: "Müşteri Satış Yetkilisi",
+        branch: "İstanbul Merkez Ofis",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric.PNG",
+        bio: "Döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
+        profileImage: "/reps/ibrahim-kahriman.png",
+        contactInfo: { phone: "+90 554 165 39 30", whatsapp: "905541653930" },
+        products: fabricProducts
+    },
+    {
+        id: "rep-emre",
+        username: "emre-serbetli",
+        name: "Emre Şerbetli",
+        title: "Müşteri Satış Yetkilisi",
+        branch: "İstanbul Merkez Ofis",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric.PNG",
+        bio: "Geniş ürün yelpazemiz ve profesyonel ekibimizle döşemelik kumaş çözümleri sunuyoruz.",
+        profileImage: "/reps/emre-serbetli.png",
+        contactInfo: { phone: "+90 554 653 37 22", whatsapp: "905546533722" },
+        products: fabricProducts
+    },
+    {
+        id: "rep-ismail",
+        username: "ismail-aydin",
+        name: "İsmail Aydın",
+        title: "Müşteri Satış Yetkilisi",
+        branch: "İstanbul Merkez Ofis",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric.PNG",
+        bio: "Döşemelik kumaş çözümlerinde uzman kadromuzla İstanbul merkez ofisimizde hizmetinizdeyiz.",
+        profileImage: "/reps/ismail-aydin.png",
+        contactInfo: { phone: "+90 539 410 75 78", whatsapp: "905394107578" },
         products: fabricProducts
     },
     // 2. BURSA (ByFabric - Bursa/İnegöl Şube)
@@ -203,8 +318,21 @@ export const reps = [
         company: "ByFabric",
         companyLogo: "/branding/byfabric.PNG",
         bio: "Bayrampaşa şubemizde döşemelik kumaş ve aksesuar çözümleriyle hizmetinizdeyiz.",
-        profileImage: "/reps/pasa-ali-senturk.png",
+        profileImage: "/reps/pasa-ali-senturk.jpeg",
         contactInfo: { phone: "+90 553 649 28 36", whatsapp: "905536492836" },
+        products: fabricProducts
+    },
+    {
+        id: "rep-emre-akbulak",
+        username: "emre-akbulak",
+        name: "Emre Akbulak",
+        title: "Müşteri Satış Yetkilisi",
+        branch: "İstanbul Bayrampaşa Şube",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric.PNG",
+        bio: "Bayrampaşa şubemizde döşemelik kumaş ve aksesuar çözümleriyle hizmetinizdeyiz.",
+        profileImage: "/reps/emre-akbulak.png",
+        contactInfo: { phone: "+90 530 923 44 81", whatsapp: "905309234481" },
         products: fabricProducts
     },
     // 4. ANKARA
@@ -217,7 +345,7 @@ export const reps = [
         company: "ByFabric",
         companyLogo: "/branding/byfabric.PNG",
         bio: "Ankara Siteler bölgesinde döşemelik kumaş ihtiyaçlarınız için profesyonel destek.",
-        profileImage: "/reps/mustafa-dirican.png",
+        profileImage: "/reps/mustafa-dirican.jpeg",
         contactInfo: { phone: "+90 532 592 33 63", whatsapp: "905325923363" },
         products: fabricProducts
     },
@@ -245,7 +373,7 @@ export const reps = [
         company: "ByFabric",
         companyLogo: "/branding/byfabric.PNG",
         bio: "Ege bölgesinde kaliteli tekstil ve döşemelik kumaş çözümleri ile yanınızdayız.",
-        profileImage: "/reps/default-avatar.png",
+        profileImage: "/reps/baris-icen.png",
         contactInfo: { phone: "+90 501 202 25 22", whatsapp: "905012022522" },
         products: fabricProducts
     },
@@ -259,7 +387,7 @@ export const reps = [
         company: "ByFabric",
         companyLogo: "/branding/byfabric.PNG",
         bio: "Modoko bölgesinde mobilya ve döşeme dünyasına profesyonel kumaş tedariği.",
-        profileImage: "/reps/default-avatar.png",
+        profileImage: "/reps/cemalettin-mazak.png",
         contactInfo: { phone: "+90 506 133 22 20", whatsapp: "905061332220" },
         products: fabricProducts
     }

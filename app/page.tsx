@@ -4,38 +4,95 @@ import { reps } from "@/data/reps";
 import { RepCard } from "@/components/RepCard";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 export default function Home() {
   const containerRef = useRef(null);
+  const repsRef = useRef<HTMLDivElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
+
+  useEffect(() => {
+    // Force scroll to top on mount/refresh as requested previously
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    let hasInteracted = false;
+    const handleInteraction = () => {
+      hasInteracted = true;
+      window.removeEventListener('wheel', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+    };
+
+    window.addEventListener('wheel', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
+    window.addEventListener('keydown', handleInteraction);
+
+    const timer = setTimeout(() => {
+      if (repsRef.current && !hasInteracted && window.scrollY < 100) {
+        const targetPosition = repsRef.current.offsetTop;
+        const startPosition = window.scrollY;
+        const distance = targetPosition - startPosition;
+        const duration = 2500;
+        let start: number | null = null;
+
+        const animation = (currentTime: number) => {
+          if (hasInteracted) return; // Stop if user starts scrolling during animation
+          if (start === null) start = currentTime;
+          const timeElapsed = currentTime - start;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        };
+
+        const ease = (t: number, b: number, c: number, d: number) => {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t + b;
+          t--;
+          return -c / 2 * (t * (t - 2) - 1) + b;
+        };
+
+        requestAnimationFrame(animation);
+      }
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('wheel', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+    };
+  }, []);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   // Staggered animation variants
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5,
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       }
     }
   };
 
   const itemVariants: any = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 1, y: 10, scale: 0.98 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.4,
         ease: [0.22, 1, 0.36, 1]
       }
     }
@@ -82,9 +139,9 @@ export default function Home() {
         >
           {/* Logo Container - Enhanced */}
           <motion.div
-            initial={{ opacity: 0, y: -40, scale: 0.9 }}
+            initial={{ opacity: 1, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
             className="flex justify-center mb-12"
           >
             <div className="relative group">
@@ -108,6 +165,7 @@ export default function Home() {
                   src="/branding/byfabric.PNG"
                   alt="ByFabric Logo"
                   fill
+                  sizes="(max-width: 768px) 256px, 480px"
                   className="relative z-10 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] brightness-105"
                   priority
                 />
@@ -150,7 +208,7 @@ export default function Home() {
         </motion.div>
 
         {/* Reps Grid - Staggered */}
-        <div className="w-full max-w-7xl mx-auto mt-24 md:mt-48 px-4">
+        <div ref={repsRef} className="w-full max-w-7xl mx-auto mt-24 md:mt-48 px-4">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -179,7 +237,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
             <div className="flex flex-col items-center md:items-start gap-4">
               <div className="h-10 w-32 relative opacity-30 grayscale hover:grayscale-0 transition-all cursor-pointer">
-                <Image src="/branding/byfabric.PNG" alt="ByFabric" fill className="object-contain" />
+                <Image src="/branding/byfabric.PNG" alt="ByFabric" fill sizes="128px" className="object-contain" />
               </div>
               <p className="text-zinc-700 text-[10px] font-black tracking-widest uppercase">Professional Sales Ecosystem</p>
             </div>

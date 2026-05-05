@@ -41,8 +41,8 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
             {/* Subtle Diagonal Light Leak */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent rotate-12 opacity-50" />
 
-            {/* Professional Noise Texture Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            {/* Professional Texture Overlay */}
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay bg-gradient-to-tr from-white/5 to-transparent" />
 
             {/* Vignette for Focus */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />

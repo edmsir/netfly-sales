@@ -25,8 +25,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
 
     // Duplicate products to ensure smooth infinite scrolling without gaps
     // Embla needs enough content to cover the viewport + buffer for seamless looping
-    const loopCount = products.length < 6 ? 4 : 2;
-    const items = Array(loopCount).fill(products).flat();
+    // Reduced loop count for performance
+    const items = Array(2).fill(products).flat();
 
     const [emblaRef, emblaApi] = useEmblaCarousel(
         {
@@ -74,12 +74,8 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     className="flex -ml-6"
                 >
                     {items.map((product, index) => (
-                        <motion.div
+                        <div
                             key={`${product.id}-${index}`}
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-                            }}
                             className="pl-6 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_40%] xl:flex-[0_0_33.33%] min-w-0"
                         >
                             <div className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-rose-500/30 transition-all duration-500 h-full">
@@ -153,7 +149,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </motion.div>
             </div>

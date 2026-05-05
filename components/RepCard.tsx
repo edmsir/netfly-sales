@@ -22,8 +22,8 @@ export function RepCard({ username, name, title, image, phone, branch, logoSrc =
                 {/* Advanced Hover Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-rose-500/10 via-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-710" />
 
-                {/* Animated Background Overlay on Hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] pointer-events-none transition-opacity duration-500 bg-[url('/noise.svg')]" />
+                {/* Animated Background Overlay on Hover - Using a subtle gradient instead of potentially 404ing noise.svg */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.05] pointer-events-none transition-opacity duration-500 bg-gradient-to-br from-white/10 to-transparent" />
 
                 {/* Company Logo Container - Refined Breathing Glow Design */}
                 <div className="relative h-14 w-36 mb-10 flex items-center justify-center overflow-visible">
@@ -59,9 +59,9 @@ export function RepCard({ username, name, title, image, phone, branch, logoSrc =
                             src={image}
                             alt={name}
                             fill
-                            className="object-cover"
+                            className={`object-cover ${username === "alper-halci" ? "object-center" : "object-top"} hover:scale-105 transition-transform duration-700`}
                             sizes="(max-width: 768px) 144px, 176px"
-                            quality={60}
+                            quality={85}
                             loading="lazy"
                         />
                     </div>

@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 // Dynamic imports for code splitting
 const ProductCarousel = dynamic(() => import("@/components/ProductCarousel").then(mod => ({ default: mod.ProductCarousel })), {
   loading: () => <div className="py-12 text-center text-zinc-500">Ürünler yükleniyor...</div>,
-  ssr: false // Heavy component, load only on client
+  ssr: false
 });
 
 const QRCodeGenerator = dynamic(() => import("@/components/QRCodeGenerator").then(mod => ({ default: mod.QRCodeGenerator })), {
@@ -36,7 +36,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
     window.scrollTo(0, 0);
     if (!rep) return;
 
-    // Pre-load images as base64 to ensure they are available for PDF/Card capture
+    // Pre-load basic images for business card capture (Share Profile feature)
     const preloadResources = async () => {
       try {
         const { compressImage } = await import('@/lib/utils');
@@ -45,7 +45,6 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         setProfileDataUrl(pUrl);
         setLogoDataUrl(lUrl);
 
-        // Also generate QR code
         const QRCode = (await import('qrcode')).default;
         const url = await QRCode.toDataURL(
           `https://byfabric.netlify.app/${rep.username}`,
@@ -57,7 +56,19 @@ export default function RepPage({ params }: { params: Promise<{ username: string
       }
     };
     preloadResources();
-  }, [rep?.username, rep?.profileImage, rep?.companyLogo]);
+  }, [rep?.username]);
+
+  useEffect(() => {
+    // Force scroll to top on mount
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    
+    // Backup scroll for slower loading browsers
+    const timer = setTimeout(() => window.scrollTo(0, 0), 10);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!rep) {
     notFound();
@@ -70,9 +81,9 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         {/* Deep Base Background */}
         <div className="absolute inset-0 bg-[#050505]" />
 
-        {/* Studio Lighting - Static Auras */}
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-rose-600/5 blur-[160px] rounded-full" />
+        {/* Studio Lighting - Static Auras (Optimized Blur) */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[80px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-rose-600/5 blur-[100px] rounded-full" />
 
         {/* Subtle Noise Texture overlay */}
         <div
@@ -101,22 +112,21 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
           {/* Large Profile Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 1, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="relative shrink-0"
           >
             <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
             <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-[40px] border border-white/10 overflow-hidden shadow-2xl bg-[#111] will-change-transform">
-              <Image
-                src={rep.profileImage}
-                alt={rep.name}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 224px, 320px"
-                quality={85}
-              />
+                <Image
+                  src={rep.profileImage}
+                  alt={rep.name}
+                  fill
+                  className={`object-cover ${rep.username === "alper-halci" ? "object-center" : "object-top"} hover:scale-105 transition-transform duration-700`}
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  priority
+                />
             </div>
           </motion.div>
 
@@ -124,9 +134,9 @@ export default function RepPage({ params }: { params: Promise<{ username: string
           <div className="flex-grow text-center lg:text-left">
             {/* Company Logo Area - No Box, Pure Glow */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 1, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className="mb-6 md:mb-10 flex justify-center lg:justify-start"
             >
               <div className="relative h-20 w-48 md:h-24 md:w-64 flex items-center justify-center overflow-visible">
@@ -148,6 +158,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   src={rep.companyLogo}
                   alt={rep.company || "Company Logo"}
                   fill
+                  sizes="(max-width: 768px) 160px, 320px"
                   className="relative z-10 object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.4)] brightness-[1.02]"
                   priority
                 />
@@ -157,7 +168,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="inline-block px-4 py-1 mb-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest"
             >
               {rep.title}
@@ -166,7 +177,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ duration: 0.4 }}
               className="text-4xl md:text-7xl font-black mb-2 tracking-tight"
             >
               {rep.name}
@@ -253,43 +264,35 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             transition={{ delay: 1.3, duration: 0.5 }}
             className="w-full xl:w-auto flex flex-col items-center gap-4"
           >
-            {/* PDF Download Button */}
+            {/* PDF Download Button - Reverted to on-demand generation per user request */}
             <button
               disabled={isDownloadingPDF}
               className="relative group bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-500 text-white px-8 py-5 rounded-3xl font-black text-lg shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 border-2 border-white/20 overflow-hidden w-full xl:w-auto"
               onClick={async () => {
                 setIsDownloadingPDF(true);
                 try {
-                  // Lazy load PDF libraries
                   const { pdf } = await import('@react-pdf/renderer');
                   const { PDFCatalog } = await import('@/components/PDFCatalog');
                   const { compressImage } = await import('@/lib/utils');
-
-                  // Generate QR code as data URL
                   const QRCode = (await import('qrcode')).default;
-                  const qrDataUrl = await QRCode.toDataURL(
+
+                  // 1. Generate QR code
+                  const qrUrl = await QRCode.toDataURL(
                     `https://byfabric.netlify.app/${rep.username}`,
                     { width: 300, margin: 2 }
                   );
 
-                  // Compress logo with transparency
-                  const logoDataUrlTransparent = await compressImage(rep.companyLogo, 0.8, 600, true);
+                  // 2. Compress representative assets
+                  const pUrl = await compressImage(rep.profileImage, 0.7, 400);
+                  const lUrl = await compressImage(rep.companyLogo, 0.7, 400, true);
 
-                  // Compress product images
+                  // 3. Compress product images (Main only for speed, or limited variants)
                   const compressedProducts = await Promise.all(
                     ((rep.products || []) as any[]).map(async (p: any) => {
                       const compressedMain = await compressImage(p.image, 0.6, 800);
-
                       let compressedVariants: string[] = [];
-                      let variantNames: string[] = [];
-
+                      
                       if (p.variants) {
-                        // Extract names BEFORE compression
-                        variantNames = p.variants.map((v: string) => {
-                          const filename = v.split('/').pop() || "";
-                          return filename.split('.')[0].replace(/-/g, ' ');
-                        });
-
                         compressedVariants = await Promise.all(
                           p.variants.map((v: string) => compressImage(v, 0.6, 400))
                         );
@@ -299,12 +302,15 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                         ...p,
                         image: compressedMain,
                         variants: p.variants ? compressedVariants : undefined,
-                        variantNames: p.variants ? variantNames : undefined,
+                        variantNames: p.variants ? p.variants.map((v: string) => {
+                          const filename = v.split('/').pop() || "";
+                          return filename.split('.')[0].replace(/-/g, ' ');
+                        }) : undefined,
                       };
                     })
                   );
 
-                  // Generate and download PDF
+                  // 4. Generate and download PDF
                   const blob = await pdf(
                     <PDFCatalog
                       repName={rep.name}
@@ -312,11 +318,11 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                       repBranch={rep.branch}
                       repPhone={rep.contactInfo.phone}
                       repCompany={rep.company}
-                      repProfileImage={profileDataUrl || rep.profileImage}
-                      companyLogo={logoDataUrlTransparent || logoDataUrl || rep.companyLogo}
+                      repProfileImage={pUrl}
+                      companyLogo={lUrl}
                       profileUrl={`https://byfabric.netlify.app/${rep.username}`}
                       products={compressedProducts as any}
-                      qrCodeDataUrl={qrDataUrl}
+                      qrCodeDataUrl={qrUrl}
                     />
                   ).toBlob();
 
@@ -337,7 +343,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               <div className="relative flex items-center justify-center gap-3">
                 <FileDown className="w-6 h-6" />
-                {isDownloadingPDF ? 'PDF Hazırlanıyor...' : 'PDF Katalog İndir'}
+                {isDownloadingPDF ? 'Katalog Hazırlanıyor...' : 'PDF Katalog İndir'}
               </div>
             </button>
 
@@ -422,12 +428,60 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
           {rep.products && rep.products.length > 0 && (
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 1 }}
             >
-              <ProductCarousel products={rep.products} />
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                  <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+                    {rep.company === 'By Malzeme' ? 'Teknik Malzeme Portföyü' : 'Ürün Portföyü'}
+                  </h2>
+                  <p className="text-zinc-400 font-medium italic">
+                    {rep.company === 'By Malzeme' 
+                      ? 'Profesyonel mobilya ve döşeme teknik çözümlerimiz.' 
+                      : 'Seçkin ürün listemiz ve güncel stok bilgileri.'}
+                  </p>
+                </div>
+              </div>
+
+              {rep.company === 'By Malzeme' ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {rep.products.map((product, idx) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: idx * 0.05 }}
+                      className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-rose-500/30 transition-all duration-500"
+                    >
+                      <div className="relative h-64 w-full overflow-hidden bg-[#111] p-6">
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          fill
+                          className="object-contain p-4 group-hover:scale-110 transition-transform duration-700"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </div>
+                      <div className="p-8 flex flex-col flex-grow">
+                        <h3 className="text-xl font-bold text-white mb-2 tracking-tight group-hover:text-rose-500 transition-colors">
+                          {product.title}
+                        </h3>
+                        <p className="text-zinc-500 text-sm leading-relaxed line-clamp-2 mb-6">
+                          {product.description}
+                        </p>
+                        <button className="mt-auto w-full py-3 rounded-xl bg-white/5 hover:bg-rose-600 text-white text-xs font-bold transition-all border border-white/10 hover:border-rose-600">
+                          BİLGİ AL
+                        </button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <ProductCarousel products={rep.products} />
+              )}
             </motion.div>
           )}
 
