@@ -38,9 +38,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
         },
         [
             AutoScroll({
-                speed: 2, // Faster speed
-                stopOnInteraction: false, // Don't stop permanently on drag
-                stopOnMouseEnter: true, // Pause on hover
+                speed: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 2,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
                 stopOnFocusIn: false
             })
         ]
@@ -59,7 +59,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                 </div>
             </div>
 
-            <div className="overflow-hidden" ref={emblaRef}>
+            <div className="overflow-hidden relative" ref={emblaRef}>
                 <motion.div
                     initial="hidden"
                     whileInView="visible"

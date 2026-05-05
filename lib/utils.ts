@@ -8,7 +8,9 @@ export function cn(...inputs: ClassValue[]) {
 export async function compressImage(imageUrl: string, quality = 0.7, maxWidth = 1200, preserveTransparency = false): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.crossOrigin = "anonymous";
+    if (imageUrl.startsWith('http')) {
+      img.crossOrigin = "anonymous";
+    }
     img.onload = () => {
       let width = img.width;
       let height = img.height;

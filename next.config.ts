@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
     // Quality presets optimized for web
-    qualities: [50, 60, 75, 85],
+    qualities: [40, 50, 60, 75, 85],
 
     remotePatterns: [
       {

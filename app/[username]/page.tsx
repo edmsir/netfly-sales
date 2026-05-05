@@ -82,8 +82,8 @@ export default function RepPage({ params }: { params: Promise<{ username: string
         <div className="absolute inset-0 bg-[#050505]" />
 
         {/* Studio Lighting - Static Auras (Optimized Blur) */}
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[80px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-rose-600/5 blur-[100px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[40px] md:blur-[80px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-rose-600/5 blur-[50px] md:blur-[100px] rounded-full" />
 
         {/* Subtle Noise Texture overlay */}
         <div
@@ -117,7 +117,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="relative shrink-0"
           >
-            <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
+            <div className="absolute inset-0 bg-blue-500/20 blur-2xl md:blur-3xl rounded-full" />
             <div className="relative w-56 h-56 md:w-80 md:h-80 rounded-[40px] border border-white/10 overflow-hidden shadow-2xl bg-[#111] will-change-transform">
                 <Image
                   src={rep.profileImage}
@@ -151,7 +151,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  className="absolute inset-0 bg-white blur-3xl rounded-full pointer-events-none"
+                  className="absolute inset-0 bg-white blur-2xl md:blur-3xl rounded-full pointer-events-none"
                 />
 
                 <Image
@@ -349,7 +349,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
             {/* Share Profile Button */}
             <button
-              disabled={isSharing}
+              disabled={isSharing || !profileDataUrl || !logoDataUrl}
               className="relative group bg-gradient-to-br from-rose-600 via-rose-500 to-red-500 text-white px-8 py-5 rounded-3xl font-black text-lg shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 border-2 border-white/20 overflow-hidden w-full xl:w-auto"
               onClick={async () => {
                 setIsSharing(true);
@@ -403,8 +403,8 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               <div className="relative flex items-center justify-center gap-3">
-                <Share2 className={`w-6 h-6 ${isSharing ? 'animate-pulse' : 'group-hover:rotate-12'} transition-transform`} />
-                {isSharing ? 'HAZIRLANIYOR...' : 'PROFİLİ PAYLAŞ'}
+                <Share2 className={`w-6 h-6 ${isSharing || !profileDataUrl || !logoDataUrl ? 'animate-pulse' : 'group-hover:rotate-12'} transition-transform`} />
+                {isSharing || !profileDataUrl || !logoDataUrl ? 'HAZIRLANIYOR...' : 'PROFİLİ PAYLAŞ'}
               </div>
             </button>
 
@@ -451,8 +451,9 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   {rep.products.map((product, idx) => (
                     <motion.div
                       key={product.id}
-                      initial={{ opacity: 0, scale: 0.9 }}
+                      initial={typeof window !== 'undefined' && window.innerWidth < 768 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
                       transition={{ delay: idx * 0.05 }}
                       className="bg-[#0f0f0f] border border-white/10 rounded-[32px] overflow-hidden flex flex-col group hover:border-rose-500/30 transition-all duration-500"
                     >

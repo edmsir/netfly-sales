@@ -86,14 +86,14 @@ export default function Home() {
   };
 
   const itemVariants: any = {
-    hidden: { opacity: 1, y: 10, scale: 0.98 },
+    hidden: { opacity: 0, y: 10, scale: 0.98 },
     show: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.4,
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.3,
+        ease: "easeOut"
       }
     }
   };
@@ -102,38 +102,43 @@ export default function Home() {
     <main ref={containerRef} className="min-h-screen bg-[#020202] text-white selection:bg-rose-500/30 overflow-x-hidden">
       {/* Dynamic Interactive Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0">
-        {/* Animated Orbs */}
+        {/* Animated Orbs - Reduced on mobile */}
+        <div className="md:contents">
+          <motion.div
+            initial={false}
+            animate={{
+              x: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : [0, 100, 0],
+              y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : [0, 50, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)] blur-[60px] md:blur-[120px] will-change-transform"
+          />
+        </div>
         <motion.div
+          initial={false}
           animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,rgba(225,29,72,0.15)_0%,transparent_70%)] blur-[120px] will-change-transform"
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 120, 0],
-            scale: [1, 1.1, 1]
+            x: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : [0, -80, 0],
+            y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : [0, 120, 0],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)] blur-[120px] will-change-transform"
+          className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.08)_0%,transparent_70%)] blur-[60px] md:blur-[120px] will-change-transform"
         />
 
-        {/* Scanning Line Effect */}
+        {/* Scanning Line Effect - Desktop Only */}
         <motion.div
           animate={{ y: ["-100%", "200%"] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/[0.03] to-transparent h-[50%]"
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-500/[0.03] to-transparent h-[50%] hidden md:block"
         />
 
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-20" />
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-[0.05] md:opacity-20" />
       </div>
 
       <section className="relative z-10 min-h-screen flex flex-col items-center justify-center pt-12 md:pt-20 pb-8 md:pb-12 px-4 md:px-6">
         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           style={{ opacity, scale }}
           className="max-w-5xl mx-auto text-center"
         >
@@ -158,7 +163,7 @@ export default function Home() {
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
-                  className="absolute inset-x-0 inset-y-8 bg-white blur-[60px] rounded-full pointer-events-none"
+                  className="absolute inset-x-0 inset-y-12 bg-white blur-[20px] md:blur-[40px] opacity-50 md:opacity-100 rounded-full pointer-events-none"
                 />
 
                 <Image
@@ -166,7 +171,7 @@ export default function Home() {
                   alt="ByFabric Logo"
                   fill
                   sizes="(max-width: 768px) 256px, 480px"
-                  className="relative z-10 object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] brightness-105"
+                  className="relative z-10 object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   priority
                 />
               </div>

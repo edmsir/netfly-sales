@@ -57,16 +57,13 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                         />
                         <div
                             className="relative w-44 h-44 rounded-[42px] overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
-                            style={{ backgroundColor: '#050505' }}
-                        >
-                            <img
-                                src={image}
-                                alt={name}
-                                crossOrigin="anonymous"
-                                className="w-full h-full object-cover"
-                                style={{ display: 'block', width: '100%', height: '100%' }}
-                            />
-                        </div>
+                            style={{ 
+                                backgroundColor: '#111',
+                                backgroundImage: `url(${image})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center'
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -80,7 +77,6 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                         <img
                             src={logoSrc}
                             alt={company}
-                            crossOrigin="anonymous"
                             className="relative z-10 max-h-full max-w-full object-contain brightness-110 animate-[pulse_4s_ease-in-out_infinite]"
                             style={{
                                 display: 'block',
