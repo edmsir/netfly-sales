@@ -34,9 +34,15 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
             {/* Premium Studio Background Layers */}
             <div className="absolute inset-0 bg-[#050505]" />
 
-            {/* Soft Studio Lighting (Static) */}
-            <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[120%] bg-rose-500/10 blur-[120px] rounded-full" />
-            <div className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[100%] bg-blue-500/10 blur-[100px] rounded-full" />
+            {/* Soft Studio Lighting (Using Gradients for Capture Stability) */}
+            <div 
+                className="absolute top-[-20%] right-[-10%] w-[70%] h-[120%] opacity-40" 
+                style={{ background: 'radial-gradient(circle, rgba(225,29,72,0.1) 0%, transparent 70%)' }}
+            />
+            <div 
+                className="absolute bottom-[-20%] left-[-10%] w-[60%] h-[100%] opacity-40" 
+                style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%)' }}
+            />
 
             {/* Subtle Diagonal Light Leak */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-transparent rotate-12 opacity-50" />
@@ -51,16 +57,12 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
             <div className="relative z-10 flex w-full h-full p-12 gap-12 items-center">
                 {/* Profile Section */}
                 <div className="relative flex-shrink-0 flex flex-col items-center">
-                    <div className="relative w-48 h-48">
-                        <div
-                            className="relative w-48 h-48 rounded-[48px] overflow-hidden border-2 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                            style={{ 
-                                backgroundColor: '#111',
-                                backgroundImage: `url(${image})`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                imageRendering: '-webkit-optimize-contrast'
-                            }}
+                    <div className="relative w-48 h-48 rounded-[48px] overflow-hidden border-2 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-[#111]">
+                        <img
+                            src={image}
+                            alt={name}
+                            className="w-full h-full object-cover"
+                            style={{ imageRendering: '-webkit-optimize-contrast' }}
                         />
                     </div>
                 </div>
@@ -69,10 +71,19 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                 <div className="flex flex-col flex-grow min-w-0 h-full justify-center">
                     {/* Logo Area - Enhanced Visibility */}
                     <div className="relative h-24 w-64 mb-8 flex items-center justify-start overflow-visible">
-                        {/* Premium Neon/Glow Backlight */}
-                        <div className="absolute -inset-6 bg-rose-500/10 blur-3xl rounded-full" />
-                        <div className="absolute -inset-2 bg-white/5 blur-2xl rounded-full" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent blur-xl rounded-xl" />
+                        {/* Premium Glow using Gradients instead of Blurs for Capture Stability */}
+                        <div 
+                            className="absolute -inset-10 opacity-30" 
+                            style={{ 
+                                background: 'radial-gradient(circle, rgba(225,29,72,0.15) 0%, transparent 70%)'
+                            }} 
+                        />
+                        <div 
+                            className="absolute -inset-4 opacity-20" 
+                            style={{ 
+                                background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%)'
+                            }} 
+                        />
 
                         <img
                             src={logoSrc}
@@ -80,7 +91,6 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
                             className="relative z-10 max-h-full max-w-full object-contain"
                             style={{
                                 display: 'block',
-                                filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5))',
                                 imageRendering: '-webkit-optimize-contrast',
                             }}
                         />
