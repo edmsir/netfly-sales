@@ -308,6 +308,19 @@ export const reps = [
         contactInfo: { phone: "+90 530 330 59 33", whatsapp: "905303305933" },
         products: fabricProducts
     },
+    {
+        id: "rep-burak",
+        username: "burak-arslantas",
+        name: "Burak Arslantaş",
+        title: "Müşteri Satış Yetkilisi",
+        branch: "Bursa/İnegöl Şube",
+        company: "ByFabric",
+        companyLogo: "/branding/byfabric.PNG",
+        bio: "İnegöl bölgesinde kaliteli döşemelik kumaş çözümlerimizle hizmetinizdeyiz.",
+        profileImage: "/reps/burak-arslantas.png",
+        contactInfo: { phone: "+90 542 285 28 18", whatsapp: "905422852818" },
+        products: fabricProducts
+    },
     // 3. BAYRAMPAŞA
     {
         id: "rep-pasa",
@@ -390,7 +403,7 @@ export const reps = [
         profileImage: "/reps/cemalettin-mazak.png",
         contactInfo: { phone: "+90 506 133 22 20", whatsapp: "905061332220" },
         products: fabricProducts
-    }
+    },
 ];
 
 export const defaultCompanyLogo = "/branding/byfabric.PNG";

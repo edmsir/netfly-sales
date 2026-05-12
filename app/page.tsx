@@ -173,6 +173,7 @@ export default function Home() {
                   sizes="(max-width: 768px) 256px, 480px"
                   className="relative z-10 object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   priority
+                  loading="eager"
                 />
               </div>
             </div>

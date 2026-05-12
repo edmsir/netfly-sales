@@ -50,18 +50,16 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
             {/* Content Area */}
             <div className="relative z-10 flex w-full h-full p-12 gap-12 items-center">
                 {/* Profile Section */}
-                <div className="relative flex-shrink-0 flex flex-col items-center gap-6">
-                    <div className="relative w-44 h-44">
+                <div className="relative flex-shrink-0 flex flex-col items-center">
+                    <div className="relative w-48 h-48">
                         <div
-                            className="absolute inset-0 rounded-full scale-110 bg-white/[0.03] blur-xl"
-                        />
-                        <div
-                            className="relative w-44 h-44 rounded-[42px] overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+                            className="relative w-48 h-48 rounded-[48px] overflow-hidden border-2 border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
                             style={{ 
                                 backgroundColor: '#111',
                                 backgroundImage: `url(${image})`,
                                 backgroundSize: 'cover',
-                                backgroundPosition: 'center'
+                                backgroundPosition: 'center',
+                                imageRendering: '-webkit-optimize-contrast'
                             }}
                         />
                     </div>
@@ -69,18 +67,21 @@ export function BusinessCard({ name, title, branch, phone, image, logoSrc, compa
 
                 {/* Details Section */}
                 <div className="flex flex-col flex-grow min-w-0 h-full justify-center">
-                    {/* Logo Area - Pure Transparent with Refined Breathing Glow */}
-                    <div className="relative h-20 w-52 mb-6 flex items-center justify-center overflow-visible">
-                        {/* Static Subtle Ambient Glow */}
-                        <div className="absolute inset-0 bg-white/[0.01] blur-2xl rounded-full" />
+                    {/* Logo Area - Enhanced Visibility */}
+                    <div className="relative h-24 w-64 mb-8 flex items-center justify-start overflow-visible">
+                        {/* Premium Neon/Glow Backlight */}
+                        <div className="absolute -inset-6 bg-rose-500/10 blur-3xl rounded-full" />
+                        <div className="absolute -inset-2 bg-white/5 blur-2xl rounded-full" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent blur-xl rounded-xl" />
 
                         <img
                             src={logoSrc}
                             alt={company}
-                            className="relative z-10 max-h-full max-w-full object-contain brightness-110 animate-[pulse_4s_ease-in-out_infinite]"
+                            className="relative z-10 max-h-full max-w-full object-contain"
                             style={{
                                 display: 'block',
-                                filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.4))'
+                                filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.5))',
+                                imageRendering: '-webkit-optimize-contrast',
                             }}
                         />
                     </div>

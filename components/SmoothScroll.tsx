@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1.2,
@@ -16,6 +19,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
             infinite: false,
         });
 
+        // Reset scroll to top on path change
+        lenis.scrollTo(0, { immediate: true });
+
         function raf(time: number) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -26,7 +32,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         return () => {
             lenis.destroy();
         };
-    }, []);
+    }, [pathname]);
 
     return <>{children}</>;
 }

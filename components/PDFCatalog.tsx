@@ -26,10 +26,8 @@ const styles = StyleSheet.create({
     },
     // Cover Page
     coverPage: {
-        flex: 1,
-        justifyContent: 'center',
+        padding: 20,
         alignItems: 'center',
-        padding: 60,
         position: 'relative',
     },
     coverAccent: {
@@ -40,17 +38,41 @@ const styles = StyleSheet.create({
         height: 10,
         backgroundColor: '#e11d48',
     },
+    coverLogoContainer: {
+        width: '100%',
+        height: 180,
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    logoGlow: {
+        position: 'absolute',
+        width: 450,
+        height: 180,
+        backgroundColor: '#ffffff',
+        borderRadius: 90,
+        opacity: 0.1,
+    },
+    logoGlowCore: {
+        position: 'absolute',
+        width: 320,
+        height: 110,
+        backgroundColor: '#ffffff',
+        borderRadius: 55,
+        opacity: 0.15,
+    },
     coverLogo: {
-        width: 180,
-        marginBottom: 40,
+        width: 300,
+        height: 120,
         objectFit: 'contain',
     },
     coverProfile: {
-        width: 160,
-        height: 160,
-        borderRadius: 80,
+        width: 140,
+        height: 140,
+        borderRadius: 70,
         border: '4px solid #e11d48',
-        marginBottom: 30,
+        marginBottom: 20,
         objectFit: 'cover',
     },
     coverTitle: {
@@ -61,10 +83,10 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     coverSubtitle: {
-        fontSize: 16,
+        fontSize: 14,
         color: '#9ca3af',
         letterSpacing: 4,
-        marginBottom: 40,
+        marginBottom: 20,
         textTransform: 'uppercase',
     },
     coverFooter: {
@@ -142,10 +164,10 @@ const styles = StyleSheet.create({
         gap: 12,
     },
     materialCard: {
-        width: '19%', // 5 items per row
+        width: '23%', // 4 items per row
         backgroundColor: '#0f0f0f',
         borderRadius: 10,
-        padding: 8,
+        padding: 6,
         border: '1px solid #222',
         alignItems: 'center',
         marginBottom: 8,
@@ -231,10 +253,10 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
     const fabricSeries = products.filter(p => p.variants && p.variants.length > 0);
     const materialItems = products.filter(p => !p.variants || p.variants.length === 0);
 
-    // Chunk materials (24 per page to fit all 21 on one page)
+    // Chunk materials (16 per page for perfect fit)
     const materialChunks = [];
-    for (let i = 0; i < materialItems.length; i += 24) {
-        materialChunks.push(materialItems.slice(i, i + 24));
+    for (let i = 0; i < materialItems.length; i += 16) {
+        materialChunks.push(materialItems.slice(i, i + 16));
     }
 
     return (
@@ -243,7 +265,14 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
             <Page size="A4" style={styles.page}>
                 <View style={styles.coverPage}>
                     <View style={styles.coverAccent} />
-                    {companyLogo && <PDFImage src={companyLogo} style={styles.coverLogo} />}
+                    
+                    {/* Premium Logo Section with Neon/Glow Effect */}
+                    <View style={styles.coverLogoContainer}>
+                        <View style={styles.logoGlow} />
+                        <View style={styles.logoGlowCore} />
+                        {companyLogo && <PDFImage src={companyLogo} style={styles.coverLogo} />}
+                    </View>
+
                     {repProfileImage && <PDFImage src={repProfileImage} style={styles.coverProfile} />}
                     
                     <Text style={styles.coverTitle}>ÜRÜN KATALOĞU</Text>
@@ -279,7 +308,12 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
                                         {variants.length} Renk Seçeneği
                                     </Text>
                                 </View>
-                                {companyLogo && <PDFImage src={companyLogo} style={{ width: 60, objectFit: 'contain' }} />}
+                                {companyLogo && (
+                                    <View style={{ position: 'relative', padding: 10, alignItems: 'center' }}>
+                                        <View style={{ position: 'absolute', width: 80, height: 30, backgroundColor: 'white', opacity: 0.25, borderRadius: 15 }} />
+                                        <PDFImage src={companyLogo} style={{ width: 60, height: 25, objectFit: 'contain' }} />
+                                    </View>
+                                )}
                             </View>
 
                             <View style={styles.variantGrid}>
@@ -299,7 +333,7 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
                         </View>
 
                         <View style={styles.footer}>
-                            <Text>© 2026 {repCompany || 'ByFabric'} | {repName}</Text>
+                            <Text>© 2026 {repCompany === 'ByFabric' ? 'ByFabric Sales' : repCompany} | {repName}</Text>
                             <Text>{product.title} - Koleksiyon</Text>
                         </View>
                     </Page>
@@ -315,7 +349,12 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
                                 <Text style={styles.sectionTitle}>TEKNİK ÜRÜNLER</Text>
                                 <Text style={styles.sectionSubtitle}>Malzeme ve Aksesuar Çözümleri (Sayfa {cIdx + 1})</Text>
                             </View>
-                            {companyLogo && <PDFImage src={companyLogo} style={{ width: 60, objectFit: 'contain' }} />}
+                            {companyLogo && (
+                                <View style={{ position: 'relative', padding: 10, alignItems: 'center' }}>
+                                    <View style={{ position: 'absolute', width: 80, height: 30, backgroundColor: 'white', opacity: 0.25, borderRadius: 15 }} />
+                                    <PDFImage src={companyLogo} style={{ width: 60, height: 25, objectFit: 'contain' }} />
+                                </View>
+                            )}
                         </View>
 
                         <View style={styles.materialGrid}>
@@ -330,7 +369,7 @@ export const PDFCatalog: React.FC<PDFCatalogProps> = ({
                     </View>
 
                     <View style={styles.footer}>
-                        <Text>© 2026 {repCompany || 'ByFabric'} | {repName}</Text>
+                        <Text>© 2026 {repCompany === 'ByFabric' ? 'ByFabric Sales' : repCompany} | {repName}</Text>
                         <Text>Teknik Ürünler - Sayfa {cIdx + 1}</Text>
                     </View>
                 </Page>

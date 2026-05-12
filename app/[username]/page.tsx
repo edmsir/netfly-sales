@@ -28,6 +28,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
   const rep = reps.find((r) => r.username === username);
   const [isSharing, setIsSharing] = useState(false);
   const [isDownloadingPDF, setIsDownloadingPDF] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [profileDataUrl, setProfileDataUrl] = useState<string>("");
   const [logoDataUrl, setLogoDataUrl] = useState<string>("");
@@ -126,6 +127,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   className={`object-cover ${rep.username === "alper-halci" ? "object-center" : "object-top"} hover:scale-105 transition-transform duration-700`}
                   sizes="(max-width: 768px) 100vw, 400px"
                   priority
+                  loading="eager"
                 />
             </div>
           </motion.div>
@@ -160,7 +162,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   fill
                   sizes="(max-width: 768px) 160px, 320px"
                   className="relative z-10 object-contain filter drop-shadow-[0_0_6px_rgba(255,255,255,0.4)] brightness-[1.02]"
-                  priority
+                  loading="eager"
                 />
               </div>
             </motion.div>
@@ -230,8 +232,6 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             </motion.div>
           </div>
 
-          {/* Business Card Section is now hidden in the UI - Only used for Capture/PDF */}
-
           {/* Hidden Business Card for Capture - Using absolute off-screen positioning for rendering accuracy */}
           <div
             className="fixed left-[-9999px] top-0 pointer-events-none"
@@ -240,10 +240,11 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               height: '450px',
               opacity: 1,
               visibility: 'visible',
-              backgroundColor: '#050505'
+              backgroundColor: '#050505',
+              position: 'fixed' // Explicitly set non-static
             }}
           >
-            <div id="business-card-capture-target" style={{ width: '800px', height: '450px' }}>
+            <div id="business-card-capture-target" style={{ width: '800px', height: '450px', position: 'relative' }}>
               <BusinessCard
                 name={rep.name}
                 title={rep.title}
@@ -347,10 +348,42 @@ export default function RepPage({ params }: { params: Promise<{ username: string
               </div>
             </button>
 
-            {/* Share Profile Button */}
-            <button
-              disabled={isSharing || !profileDataUrl || !logoDataUrl}
-              className="relative group bg-gradient-to-br from-rose-600 via-rose-500 to-red-500 text-white px-8 py-5 rounded-3xl font-black text-lg shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 border-2 border-white/20 overflow-hidden w-full xl:w-auto"
+            {/* Share Profile Button with Hover Preview */}
+            <div className="relative w-full xl:w-auto">
+              {/* Floating Preview Popover */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ 
+                  opacity: showPreview ? 1 : 0, 
+                  scale: showPreview ? 1 : 0.8, 
+                  y: showPreview ? -20 : 10,
+                  display: showPreview ? 'block' : 'none'
+                }}
+                className="absolute bottom-full left-1/2 -translate-x-1/2 z-[100] mb-6 hidden lg:block"
+              >
+                <div className="relative p-1 bg-gradient-to-br from-white/20 to-black rounded-[2rem] shadow-2xl backdrop-blur-xl border border-white/10">
+                  <div className="scale-[0.4] origin-bottom">
+                    <BusinessCard
+                      name={rep.name}
+                      title={rep.title}
+                      branch={rep.branch}
+                      phone={rep.contactInfo.phone}
+                      image={profileDataUrl || rep.profileImage}
+                      logoSrc={logoDataUrl || rep.companyLogo}
+                      company={rep.company}
+                      qrCodeDataUrl={qrDataUrl}
+                    />
+                  </div>
+                </div>
+                {/* Arrow */}
+                <div className="absolute top-[100%] left-1/2 -translate-x-1/2 w-4 h-4 bg-black border-r border-b border-white/10 rotate-45" />
+              </motion.div>
+
+              <button
+                disabled={isSharing || !profileDataUrl || !logoDataUrl}
+                onMouseEnter={() => setShowPreview(true)}
+                onMouseLeave={() => setShowPreview(false)}
+                className="relative group bg-gradient-to-br from-rose-600 via-rose-500 to-red-500 text-white px-8 py-5 rounded-3xl font-black text-lg shadow-2xl shadow-rose-500/30 hover:shadow-rose-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 border-2 border-white/20 overflow-hidden w-full xl:w-auto"
               onClick={async () => {
                 setIsSharing(true);
                 try {
@@ -365,7 +398,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
 
                   const dataUrl = await htmlToImage.toPng(container, {
                     quality: 1.0,
-                    pixelRatio: 2, // 2 is usually enough and more stable than 4
+                    pixelRatio: 3, // Increased for maximum sharpness
                     cacheBust: true,
                     backgroundColor: '#050505',
                     fontEmbedCSS: '',
@@ -407,6 +440,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                 {isSharing || !profileDataUrl || !logoDataUrl ? 'HAZIRLANIYOR...' : 'PROFİLİ PAYLAŞ'}
               </div>
             </button>
+          </div>
 
             {/* QR Code Section - Re-styled */}
             <div className="bg-white/5 p-6 rounded-[32px] border border-white/10 backdrop-blur-xl w-full max-w-xl xl:max-w-md">
@@ -487,7 +521,7 @@ export default function RepPage({ params }: { params: Promise<{ username: string
           )}
 
           <div className="mt-20 md:mt-32 text-center text-zinc-600 text-sm font-medium">
-            <p>© {new Date().getFullYear()} Netfly Sales. Tüm hakları saklıdır.</p>
+            <p>© {new Date().getFullYear()} ByFabric Sales. Tüm hakları saklıdır.</p>
           </div>
         </div>
       </section>
