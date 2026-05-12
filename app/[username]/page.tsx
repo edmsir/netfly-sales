@@ -232,29 +232,34 @@ export default function RepPage({ params }: { params: Promise<{ username: string
             </motion.div>
           </div>
 
-          {/* Hidden Business Card for Capture - Using absolute off-screen positioning for rendering accuracy */}
+          {/* Hidden Business Card for Capture - Robust rendering setup */}
           <div
-            className="fixed left-[-9999px] top-0 pointer-events-none"
             style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
               width: '800px',
               height: '450px',
-              opacity: 1,
-              visibility: 'visible',
+              zIndex: -100,
+              pointerEvents: 'none',
+              opacity: 0.02, // Near-invisible but still rendered by browser
               backgroundColor: '#050505',
-              position: 'fixed' // Explicitly set non-static
+              overflow: 'hidden'
             }}
           >
             <div id="business-card-capture-target" style={{ width: '800px', height: '450px', position: 'relative' }}>
-              <BusinessCard
-                name={rep.name}
-                title={rep.title}
-                branch={rep.branch}
-                phone={rep.contactInfo.phone}
-                image={profileDataUrl || rep.profileImage}
-                logoSrc={logoDataUrl || rep.companyLogo}
-                company={rep.company}
-                qrCodeDataUrl={qrDataUrl}
-              />
+              {profileDataUrl && logoDataUrl && qrDataUrl ? (
+                <BusinessCard
+                  name={rep.name}
+                  title={rep.title}
+                  branch={rep.branch}
+                  phone={rep.contactInfo.phone}
+                  image={profileDataUrl}
+                  logoSrc={logoDataUrl}
+                  company={rep.company}
+                  qrCodeDataUrl={qrDataUrl}
+                />
+              ) : null}
             </div>
           </div>
 
@@ -393,19 +398,17 @@ export default function RepPage({ params }: { params: Promise<{ username: string
                   const container = document.getElementById('business-card-capture-target');
                   if (!container) throw new Error('Card not found');
 
-                  // Add much longer delay for final attempt to ensure all images/fonts are rock solid
-                  await new Promise(resolve => setTimeout(resolve, 1500));
-
+                  // Extended delay for network/rendering stability
+                  await new Promise(resolve => setTimeout(resolve, 3000));
+ 
                   const dataUrl = await htmlToImage.toPng(container, {
                     quality: 1.0,
-                    pixelRatio: 3, // Increased for maximum sharpness
+                    pixelRatio: 2.5, // Balanced for quality vs memory
                     cacheBust: true,
                     backgroundColor: '#050505',
-                    fontEmbedCSS: '',
                     style: {
                       opacity: '1',
                       visibility: 'visible',
-                      transform: 'none',
                     }
                   });
 
